@@ -1,0 +1,102 @@
+method: relationship_reading_v0
+
+relationship_gods_by_gender:
+  male: [正财, 偏财]
+  female: [正官, 七杀]
+  other: [正财, 偏财, 正官, 七杀]
+
+related_shen_sha_keys:
+  - tianyi_guiren
+  - taohua
+
+score_weights:
+  base_visible_star: 2
+  base_hidden_star: 1
+  base_day_branch_bonus: 1
+  base_supportive_alignment: 2
+  base_unfavorable_alignment_penalty: -2
+  base_weak_unaligned_penalty: -3
+  partner_visible_presence: 1
+  partner_hidden_presence: 1
+  partner_tianyi_auxiliary: 1
+  partner_taohua_auxiliary: 1
+  partner_current_mentor_favorable: 2
+  partner_current_mentor_positive: 1
+  partner_current_relationship_favorable: 1
+  partner_current_relationship_positive: 1
+  partner_current_relationship_cautious: -1
+  partner_current_relationship_challenging: -2
+  stability_favorable_year: 2
+  stability_positive_year: 1
+  stability_mixed_year: 0
+  stability_cautious_year: -1
+  stability_challenging_year: -2
+  stability_base_support_bonus: 1
+  stability_current_phase_cautious_penalty: -1
+  future_favorable_year: 2
+  future_positive_year: 1
+  future_mixed_year: 0
+  future_cautious_year: -1
+  future_challenging_year: -2
+
+thresholds:
+  base_support_favorable_min: 6
+  base_support_positive_min: 4
+  base_support_cautious_max: 1
+  base_support_challenging_max: 0
+  partner_support_favorable_min: 6
+  partner_support_positive_min: 4
+  partner_support_cautious_max: 1
+  partner_support_challenging_max: 0
+  stability_favorable_min: 5
+  stability_positive_min: 3
+  stability_cautious_max: 0
+  stability_challenging_max: -1
+  future_favorable_min: 4
+  future_positive_min: 2
+  future_cautious_max: 0
+  future_challenging_max: -1
+
+phase_mapping:
+  favorable: active
+  positive: active
+  mixed: steady
+  cautious: cautious
+  challenging: cautious
+
+signal_texts:
+  base_support:
+    favorable: 命局层面的关系基础支撑较强。
+    positive: 命局层面的关系基础支撑尚可。
+    mixed: 命局层面的关系基础支撑有一定依据，但分化仍在。
+    cautious: 命局层面的关系基础支撑偏谨慎。
+    challenging: 命局层面的关系基础支撑偏弱。
+  partner_support:
+    favorable: 伴侣/关系助力倾向偏强。
+    positive: 伴侣/关系助力倾向尚可。
+    mixed: 伴侣/关系助力一般，仍需观察。
+    cautious: 伴侣/关系助力偏弱，宜慢不宜急。
+    challenging: 伴侣/关系助力偏弱，宜慢不宜急。
+  stability_tendency:
+    favorable: 婚恋稳定性倾向较好。
+    positive: 婚恋稳定性有改善空间。
+    mixed: 婚恋稳定性仍有分化，宜边看边定。
+    cautious: 婚恋稳定性偏谨慎。
+    challenging: 婚恋稳定性波动信号偏多。
+  future_tendency:
+    favorable: 未来几年中有更明显的关系推进窗口。
+    positive: 未来几年婚恋推进机会有所增加。
+    mixed: 未来几年婚恋信号有起伏，宜逐步观察。
+    cautious: 未来几年婚恋推进仍需谨慎。
+    challenging: 未来几年婚恋阻力仍偏大。
+  current_phase:
+    active: 当前阶段更适合主动推进，但仍不作事件断定。
+    steady: 当前阶段宜稳中观察，可逐步推进。
+    cautious: 当前阶段更适合谨慎处理，宜慢不宜急。
+
+reason_texts:
+  gender_mapping_note: 婚恋专项受控版 v0 仅使用固定的性别-十神映射读取关系星结构，不展开完整传统婚恋体系。
+  shen_sha_auxiliary_note: 关系相关神煞命中只作辅助提示，不能单独推出婚恋结论。
+  future_window_note: 未来倾向只汇总 annual_reading_v0 的既有婚恋信号，不新增流月、流日或事件预测。
+  determined: 已基于关系星结构、既有扶抑层、当前阶段与未来五年婚恋信号，输出婚恋专项受控结论。
+  insufficient: 现有结构不足以稳定生成婚恋专项判断，当前保守留空。

@@ -1,0 +1,950 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BaziRules",
+  "description": "Deterministic judge output with ten gods, strength v0, month-main-qi pattern v1, climate balance v0, annual flow v0, annual reading v0, candidate elements v0, and controlled final useful god v0.",
+  "type": "object",
+  "required": [
+    "rules_version",
+    "engine_version",
+    "based_on_chart_version",
+    "status",
+    "day_master",
+    "summary",
+    "ten_gods",
+    "strength",
+    "pattern_system_v1",
+    "climate_balance_v0",
+    "annual_flow_v0",
+    "annual_reading_v0",
+    "career_reading_v0",
+    "relationship_reading_v0",
+    "shen_sha_v0",
+    "provisional_conclusions",
+    "final_useful_god_v0"
+  ],
+  "properties": {
+    "rules_version": { "type": "string" },
+    "engine_version": { "type": "string" },
+    "based_on_chart_version": { "type": "string" },
+    "status": { "type": "string", "enum": ["ok"] },
+    "day_master": { "type": "string", "minLength": 1, "maxLength": 1 },
+    "summary": { "type": "string" },
+    "ten_gods": {
+      "type": "object",
+      "required": ["stems_visible", "branches_hidden"],
+      "properties": {
+        "stems_visible": {
+          "type": "array",
+          "minItems": 4,
+          "items": { "$ref": "#/$defs/stemVisibleGod" }
+        },
+        "branches_hidden": {
+          "type": "array",
+          "minItems": 4,
+          "items": { "$ref": "#/$defs/branchHiddenStems" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "strength": {
+      "type": "object",
+      "required": ["score", "label", "summary", "factors", "evidence_refs"],
+      "properties": {
+        "score": { "type": "integer" },
+        "label": { "type": "string", "enum": ["weak", "balanced", "strong"] },
+        "summary": { "type": "string", "enum": ["偏弱", "中和", "偏强"] },
+        "factors": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/strengthFactor" }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "pattern_system_v1": {
+      "$ref": "#/$defs/patternSystemOutput"
+    },
+    "climate_balance_v0": {
+      "$ref": "#/$defs/climateBalanceOutput"
+    },
+    "annual_flow_v0": {
+      "$ref": "#/$defs/annualFlowOutput"
+    },
+    "annual_reading_v0": {
+      "$ref": "#/$defs/annualReadingOutput"
+    },
+    "career_reading_v0": {
+      "$ref": "#/$defs/careerReadingOutput"
+    },
+    "relationship_reading_v0": {
+      "$ref": "#/$defs/relationshipReadingOutput"
+    },
+    "shen_sha_v0": {
+      "$ref": "#/$defs/shenShaOutput"
+    },
+    "provisional_conclusions": {
+      "type": "object",
+      "required": [
+        "favorable_elements_candidates",
+        "unfavorable_elements_candidates",
+        "method",
+        "notes"
+      ],
+      "properties": {
+        "favorable_elements_candidates": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/candidateElement" }
+        },
+        "unfavorable_elements_candidates": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/candidateElement" }
+        },
+        "method": {
+          "type": "string",
+          "enum": ["candidate_only_v0"]
+        },
+        "notes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/evidenceNote" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "final_useful_god_v0": {
+      "$ref": "#/$defs/finalUsefulGod"
+    }
+  },
+  "$defs": {
+    "stemVisibleGod": {
+      "type": "object",
+      "required": ["pillar", "stem", "god", "is_day_master", "evidence_refs"],
+      "properties": {
+        "pillar": { "type": "string", "enum": ["year", "month", "day", "hour"] },
+        "stem": { "type": "string", "minLength": 1, "maxLength": 1 },
+        "god": { "type": "string" },
+        "is_day_master": { "type": "boolean" },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "branchHiddenGod": {
+      "type": "object",
+      "required": ["stem", "god", "evidence_refs"],
+      "properties": {
+        "stem": { "type": "string", "minLength": 1, "maxLength": 1 },
+        "god": { "type": "string" },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "branchHiddenStems": {
+      "type": "object",
+      "required": ["pillar", "branch", "hidden_stems"],
+      "properties": {
+        "pillar": { "type": "string", "enum": ["year", "month", "day", "hour"] },
+        "branch": { "type": "string", "minLength": 1, "maxLength": 1 },
+        "hidden_stems": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/branchHiddenGod" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "strengthFactor": {
+      "type": "object",
+      "required": ["name", "impact", "evidence_refs"],
+      "properties": {
+        "name": { "type": "string" },
+        "impact": { "type": "integer" },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "candidateElement": {
+      "type": "object",
+      "required": ["element", "reason", "evidence_refs"],
+      "properties": {
+        "element": {
+          "type": "string",
+          "enum": ["wood", "fire", "earth", "metal", "water"]
+        },
+        "reason": { "type": "string" },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidenceNote": {
+      "type": "object",
+      "required": ["text", "evidence_refs"],
+      "properties": {
+        "text": { "type": "string" },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "patternStatus": {
+      "type": "string",
+      "enum": [
+        "determined",
+        "candidate_only",
+        "insufficient_for_determination"
+      ]
+    },
+    "patternKey": {
+      "type": "string",
+      "enum": [
+        "yuebi",
+        "yuejie",
+        "yueshishen",
+        "yueshangguan",
+        "yuezhengcai",
+        "yuepiancai",
+        "yuezhengguan",
+        "yueqisha",
+        "yuezhengyin",
+        "yuepianyin"
+      ]
+    },
+    "patternTransparency": {
+      "type": "string",
+      "enum": ["visible", "hidden_only"]
+    },
+    "patternConclusion": {
+      "type": "object",
+      "required": [
+        "pattern_key",
+        "pattern_name",
+        "source",
+        "source_name",
+        "source_stem",
+        "source_god",
+        "transparency",
+        "evidence_refs"
+      ],
+      "properties": {
+        "pattern_key": { "$ref": "#/$defs/patternKey" },
+        "pattern_name": { "type": "string" },
+        "source": {
+          "type": "string",
+          "enum": ["month_branch_main_qi"]
+        },
+        "source_name": {
+          "type": "string",
+          "enum": ["月令主气"]
+        },
+        "source_stem": { "type": "string", "minLength": 1, "maxLength": 1 },
+        "source_god": { "type": "string" },
+        "transparency": { "$ref": "#/$defs/patternTransparency" },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "patternSystemOutput": {
+      "type": "object",
+      "required": [
+        "method",
+        "status",
+        "candidate_pattern",
+        "final_pattern",
+        "notes",
+        "evidence_refs"
+      ],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["month_main_qi_pattern_v1"]
+        },
+        "status": { "$ref": "#/$defs/patternStatus" },
+        "candidate_pattern": {
+          "anyOf": [
+            { "$ref": "#/$defs/patternConclusion" },
+            { "type": "null" }
+          ]
+        },
+        "final_pattern": {
+          "anyOf": [
+            { "$ref": "#/$defs/patternConclusion" },
+            { "type": "null" }
+          ]
+        },
+        "notes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/evidenceNote" }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "climateStatus": {
+      "type": "string",
+      "enum": [
+        "determined",
+        "candidate_only",
+        "insufficient_for_determination"
+      ]
+    },
+    "climateSeason": {
+      "type": "string",
+      "enum": ["spring", "summer", "autumn", "winter"]
+    },
+    "climateTendency": {
+      "type": "string",
+      "enum": ["hot", "cold", "dry", "damp"]
+    },
+    "climateDirection": {
+      "type": "string",
+      "enum": ["warming", "cooling", "moistening", "drying"]
+    },
+    "climateSeasonContext": {
+      "type": "object",
+      "required": [
+        "month_branch",
+        "season",
+        "season_name",
+        "baseline_tendencies",
+        "detected_tendencies",
+        "evidence_refs"
+      ],
+      "properties": {
+        "month_branch": { "type": "string", "minLength": 1, "maxLength": 1 },
+        "season": { "$ref": "#/$defs/climateSeason" },
+        "season_name": { "type": "string" },
+        "baseline_tendencies": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/climateTendency" }
+        },
+        "detected_tendencies": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/climateTendency" }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "climateAdjustment": {
+      "type": "object",
+      "required": [
+        "element",
+        "direction",
+        "priority",
+        "reason",
+        "evidence_refs"
+      ],
+      "properties": {
+        "element": {
+          "type": "string",
+          "enum": ["wood", "fire", "earth", "metal", "water"]
+        },
+        "direction": { "$ref": "#/$defs/climateDirection" },
+        "priority": { "type": "integer", "minimum": 1 },
+        "reason": { "type": "string" },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "climateBalanceOutput": {
+      "type": "object",
+      "required": [
+        "method",
+        "status",
+        "season_context",
+        "candidate_adjustments",
+        "notes",
+        "evidence_refs"
+      ],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["climate_balance_v0"]
+        },
+        "status": { "$ref": "#/$defs/climateStatus" },
+        "season_context": {
+          "anyOf": [
+            { "$ref": "#/$defs/climateSeasonContext" },
+            { "type": "null" }
+          ]
+        },
+        "candidate_adjustments": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/climateAdjustment" }
+        },
+        "notes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/evidenceNote" }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "annualFlowStatus": {
+      "type": "string",
+      "enum": [
+        "determined",
+        "insufficient_for_determination"
+      ]
+    },
+    "annualFlowWindow": {
+      "type": "object",
+      "required": [
+        "start_year",
+        "end_year",
+        "preview_year_count",
+        "start_year_source",
+        "sequencing_basis"
+      ],
+      "properties": {
+        "start_year": {
+          "type": ["integer", "null"]
+        },
+        "end_year": {
+          "type": ["integer", "null"]
+        },
+        "preview_year_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "start_year_source": {
+          "type": "string",
+          "enum": ["luck_cycle_first_entry_start_year"]
+        },
+        "sequencing_basis": {
+          "type": "string",
+          "enum": ["birth_year_pillar_plus_solar_year_delta"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "annualFlowEntry": {
+      "type": "object",
+      "required": [
+        "year",
+        "ganzhi",
+        "relative_index",
+        "evidence_refs"
+      ],
+      "properties": {
+        "year": {
+          "type": "integer"
+        },
+        "ganzhi": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2
+        },
+        "relative_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "annualFlowOutput": {
+      "type": "object",
+      "required": [
+        "method",
+        "status",
+        "window",
+        "entries",
+        "notes",
+        "evidence_refs"
+      ],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["annual_flow_v0"]
+        },
+        "status": { "$ref": "#/$defs/annualFlowStatus" },
+        "window": { "$ref": "#/$defs/annualFlowWindow" },
+        "entries": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/annualFlowEntry" }
+        },
+        "notes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/evidenceNote" }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "annualReadingStatus": {
+      "type": "string",
+      "enum": [
+        "determined",
+        "insufficient_for_determination"
+      ]
+    },
+    "annualReadingSignal": {
+      "type": "string",
+      "enum": [
+        "favorable",
+        "positive",
+        "mixed",
+        "cautious",
+        "challenging"
+      ]
+    },
+    "annualReadingWindow": {
+      "type": "object",
+      "required": [
+        "start_year",
+        "end_year",
+        "preview_year_count",
+        "reference_year",
+        "reference_year_source",
+        "sequencing_basis"
+      ],
+      "properties": {
+        "start_year": {
+          "type": ["integer", "null"]
+        },
+        "end_year": {
+          "type": ["integer", "null"]
+        },
+        "preview_year_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reference_year": {
+          "type": "integer"
+        },
+        "reference_year_source": {
+          "type": "string",
+          "enum": ["project_reference_year_v0"]
+        },
+        "sequencing_basis": {
+          "type": "string",
+          "enum": ["birth_year_pillar_plus_solar_year_delta"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "annualReadingEntry": {
+      "type": "object",
+      "required": [
+        "year",
+        "ganzhi",
+        "career_signal",
+        "wealth_signal",
+        "relationship_signal",
+        "mentor_signal",
+        "summary",
+        "evidence_refs"
+      ],
+      "properties": {
+        "year": {
+          "type": "integer"
+        },
+        "ganzhi": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2
+        },
+        "career_signal": { "$ref": "#/$defs/annualReadingSignal" },
+        "wealth_signal": { "$ref": "#/$defs/annualReadingSignal" },
+        "relationship_signal": { "$ref": "#/$defs/annualReadingSignal" },
+        "mentor_signal": { "$ref": "#/$defs/annualReadingSignal" },
+        "summary": { "type": "string" },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "annualReadingOutput": {
+      "type": "object",
+      "required": [
+        "method",
+        "status",
+        "window",
+        "entries",
+        "notes",
+        "evidence_refs"
+      ],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["annual_reading_v0"]
+        },
+        "status": { "$ref": "#/$defs/annualReadingStatus" },
+        "window": { "$ref": "#/$defs/annualReadingWindow" },
+        "entries": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/annualReadingEntry" }
+        },
+        "notes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/evidenceNote" }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "careerReadingStatus": {
+      "type": "string",
+      "enum": [
+        "determined",
+        "candidate_only",
+        "insufficient_for_determination"
+      ]
+    },
+    "careerPhase": {
+      "type": "string",
+      "enum": ["active", "steady", "cautious"]
+    },
+    "careerGrowthMode": {
+      "type": "string",
+      "enum": ["steady_build", "leverage_support", "active_breakthrough"]
+    },
+    "careerReadingOutput": {
+      "type": "object",
+      "required": [
+        "method",
+        "status",
+        "base_support",
+        "current_phase",
+        "growth_mode",
+        "future_tendency",
+        "resource_support",
+        "conclusion",
+        "notes",
+        "evidence_refs"
+      ],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["career_reading_v0"]
+        },
+        "status": { "$ref": "#/$defs/careerReadingStatus" },
+        "base_support": { "$ref": "#/$defs/annualReadingSignal" },
+        "current_phase": { "$ref": "#/$defs/careerPhase" },
+        "growth_mode": { "$ref": "#/$defs/careerGrowthMode" },
+        "future_tendency": { "$ref": "#/$defs/annualReadingSignal" },
+        "resource_support": { "$ref": "#/$defs/annualReadingSignal" },
+        "conclusion": { "type": "string" },
+        "notes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/evidenceNote" }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "relationshipReadingStatus": {
+      "type": "string",
+      "enum": [
+        "determined",
+        "candidate_only",
+        "insufficient_for_determination"
+      ]
+    },
+    "relationshipPhase": {
+      "type": "string",
+      "enum": ["active", "steady", "cautious"]
+    },
+    "relationshipReadingOutput": {
+      "type": "object",
+      "required": [
+        "method",
+        "status",
+        "base_support",
+        "partner_support",
+        "stability_tendency",
+        "current_phase",
+        "future_tendency",
+        "conclusion",
+        "notes",
+        "evidence_refs"
+      ],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["relationship_reading_v0"]
+        },
+        "status": { "$ref": "#/$defs/relationshipReadingStatus" },
+        "base_support": { "$ref": "#/$defs/annualReadingSignal" },
+        "partner_support": { "$ref": "#/$defs/annualReadingSignal" },
+        "stability_tendency": { "$ref": "#/$defs/annualReadingSignal" },
+        "current_phase": { "$ref": "#/$defs/relationshipPhase" },
+        "future_tendency": { "$ref": "#/$defs/annualReadingSignal" },
+        "conclusion": { "type": "string" },
+        "notes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/evidenceNote" }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "shenShaStatus": {
+      "type": "string",
+      "enum": [
+        "determined",
+        "insufficient_for_determination"
+      ]
+    },
+    "shenShaKey": {
+      "type": "string",
+      "enum": [
+        "tianyi_guiren",
+        "taohua",
+        "yima",
+        "wenchang",
+        "huagai"
+      ]
+    },
+    "shenShaBasisType": {
+      "type": "string",
+      "enum": ["day_stem", "day_branch", "year_branch"]
+    },
+    "shenShaBasis": {
+      "type": "object",
+      "required": [
+        "basis_type",
+        "basis_value",
+        "evidence_refs"
+      ],
+      "properties": {
+        "basis_type": { "$ref": "#/$defs/shenShaBasisType" },
+        "basis_value": { "type": "string", "minLength": 1 },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "shenShaMatchedPillarRef": {
+      "type": "object",
+      "required": [
+        "pillar",
+        "target_type",
+        "target_value",
+        "evidence_refs"
+      ],
+      "properties": {
+        "pillar": { "type": "string", "enum": ["year", "month", "day", "hour"] },
+        "target_type": { "type": "string", "enum": ["branch"] },
+        "target_value": { "type": "string", "minLength": 1, "maxLength": 1 },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "shenShaHit": {
+      "type": "object",
+      "required": [
+        "key",
+        "name",
+        "basis",
+        "matched_pillar_refs",
+        "evidence_refs"
+      ],
+      "properties": {
+        "key": { "$ref": "#/$defs/shenShaKey" },
+        "name": { "type": "string" },
+        "basis": { "$ref": "#/$defs/shenShaBasis" },
+        "matched_pillar_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/shenShaMatchedPillarRef" }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "shenShaOutput": {
+      "type": "object",
+      "required": [
+        "method",
+        "status",
+        "hits",
+        "notes",
+        "evidence_refs"
+      ],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["shen_sha_v0"]
+        },
+        "status": { "$ref": "#/$defs/shenShaStatus" },
+        "hits": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/shenShaHit" }
+        },
+        "notes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/evidenceNote" }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "finalUsefulGodDecisionBasis": {
+      "type": "object",
+      "required": [
+        "method",
+        "strength_label",
+        "candidate_alignment",
+        "month_bias_alignment",
+        "distribution_alignment",
+        "conflict_detected",
+        "allowed_to_finalize"
+      ],
+      "properties": {
+        "method": { "type": "string", "enum": ["controlled_useful_god_v0"] },
+        "strength_label": { "type": "string", "enum": ["weak", "balanced", "strong"] },
+        "candidate_alignment": { "type": "boolean" },
+        "month_bias_alignment": { "type": "boolean" },
+        "distribution_alignment": { "type": "boolean" },
+        "conflict_detected": { "type": "boolean" },
+        "allowed_to_finalize": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "finalUsefulGod": {
+      "type": "object",
+      "required": [
+        "status",
+        "confidence",
+        "primary_element",
+        "secondary_elements",
+        "reason_chain",
+        "blockers",
+        "decision_basis",
+        "evidence_refs"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "determined",
+            "insufficient_for_final_determination",
+            "blocked_by_conflict"
+          ]
+        },
+        "confidence": {
+          "type": "string",
+          "enum": ["low", "medium", "high"]
+        },
+        "primary_element": {
+          "type": ["string", "null"],
+          "enum": ["wood", "fire", "earth", "metal", "water", null]
+        },
+        "secondary_elements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["wood", "fire", "earth", "metal", "water"]
+          }
+        },
+        "reason_chain": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/evidenceNote" }
+        },
+        "blockers": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/evidenceNote" }
+        },
+        "decision_basis": { "$ref": "#/$defs/finalUsefulGodDecisionBasis" },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

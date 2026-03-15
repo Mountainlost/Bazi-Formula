@@ -1,0 +1,73 @@
+method: annual_reading_v0
+reference_year: 2026
+preview_year_count: 5
+reference_year_source: project_reference_year_v0
+sequencing_basis: birth_year_pillar_plus_solar_year_delta
+
+score_weights:
+  final_primary: 2
+  final_secondary: 1
+  candidate_favorable: 1
+  candidate_unfavorable: -1
+  climate_candidate: 1
+  luck_cycle_supportive_alignment: 1
+
+thresholds:
+  career_favorable_min: 4
+  career_positive_min: 2
+  career_cautious_max: -1
+  career_challenging_max: -2
+  wealth_favorable_min: 4
+  wealth_positive_min: 2
+  wealth_cautious_max: -1
+  wealth_challenging_max: -2
+  relationship_favorable_min: 4
+  relationship_positive_min: 2
+  relationship_cautious_max: -1
+  relationship_challenging_max: -2
+  overall_favorable_min: 5
+  overall_positive_min: 2
+  overall_cautious_max: -2
+  overall_challenging_max: -5
+
+mentor_rules:
+  shen_sha_key: tianyi_guiren
+
+signal_texts:
+  career:
+    favorable: 事业推进机会较多，可主动发力。
+    positive: 事业信号偏利，较适合主动推进。
+    mixed: 事业可稳中求进，先看反馈再加速。
+    cautious: 事业推进需要谨慎，宜先控节奏。
+    challenging: 事业阻力偏大，暂不宜冒进。
+  wealth:
+    favorable: 财务机会偏多，可主动整理资源与安排。
+    positive: 财运信号偏利，适合推进现有资源整合。
+    mixed: 财务议题宜稳中安排，边推进边观察。
+    cautious: 财务安排需要谨慎，宜先守住节奏。
+    challenging: 财务压力或掣肘偏多，宜先控风险。
+  relationship:
+    favorable: 婚恋推进信号较强，但仍不作具体事件断定。
+    positive: 婚恋有一定推进空间，可适度表达与观察。
+    mixed: 婚恋以观察和磨合为主，不宜急于定性。
+    cautious: 婚恋推进宜更谨慎，先看互动质量。
+    challenging: 婚恋阻力偏大，宜避免急于推进。
+  mentor:
+    favorable: 贵人助力偏强，可主动争取资源与协助。
+    positive: 外部支持机会存在，可主动连接资源。
+    mixed: 助力信号一般，仍以自身节奏为主。
+    cautious: 助力信号偏弱，不宜高估外部帮助。
+    challenging: 助力信号偏弱，不宜高估外部帮助。
+  overall:
+    favorable: 当前年度整体较有利，适合围绕重点议题主动推进，但仍不作事件性断语。
+    positive: 当前年度整体偏利，推进机会较前两档更多，可主动把握节奏。
+    mixed: 当前年度有推进空间，也有分化信号，宜边观察边推进。
+    cautious: 当前年度整体需要谨慎，宜先稳住节奏再择机推进。
+    challenging: 当前年度整体阻力偏大，宜先降预期并控制风险。
+
+reason_texts:
+  fixed_reference_year: 为保证审计与 golden 稳定，未来五年年度阅读当前固定以参考年份 2026 启动窗口。
+  scope_note: 未来五年年度阅读当前只输出受控的年度倾向判断，不展开具体事件预测、流月或绝对断语。
+  mentor_scope_note: mentor_signal 只表示结构化助力信号，不保证贵人事件或提携事件发生。
+  determined: 已基于固定参考年份、当前大运位置与既有规则层，输出未来五年的受控定性阅读。
+  insufficient: 现有结构不足以稳定生成未来五年年度阅读，当前保守留空。

@@ -1,0 +1,32 @@
+method: annual_flow_v0
+preview_year_count: 10
+start_year_source: luck_cycle_first_entry_start_year
+sequencing_basis: birth_year_pillar_plus_solar_year_delta
+heavenly_stems:
+  - 甲
+  - 乙
+  - 丙
+  - 丁
+  - 戊
+  - 己
+  - 庚
+  - 辛
+  - 壬
+  - 癸
+earthly_branches:
+  - 子
+  - 丑
+  - 寅
+  - 卯
+  - 辰
+  - 巳
+  - 午
+  - 未
+  - 申
+  - 酉
+  - 戌
+  - 亥
+reason_texts:
+  scope_note: 当前流年骨架 v0 仅输出固定窗口内的流年干支序列，不代表吉凶判断、事件预测或流月展开。
+  determined: 已基于出生年柱与大运起运年份，输出固定十年窗口的流年干支骨架。
+  insufficient: 现有起运骨架不足以确定固定流年预览窗口，当前保守留空。

@@ -1,0 +1,48 @@
+supported_year_range:
+  min: 1900
+  max: 2099
+
+supported_timezones:
+  Asia/Shanghai:
+    utc_offset_minutes: 480
+    standard_meridian: 120.0
+  Asia/Singapore:
+    utc_offset_minutes: 480
+    standard_meridian: 120.0
+  Asia/Tokyo:
+    utc_offset_minutes: 540
+    standard_meridian: 135.0
+
+true_solar_time:
+  equation_of_time_formula: simple_b_formula
+  supported_birth_places:
+    Hangzhou:
+      timezone: Asia/Shanghai
+      longitude: 120.1551
+    Shanghai:
+      timezone: Asia/Shanghai
+      longitude: 121.4737
+    Urumqi:
+      timezone: Asia/Shanghai
+      longitude: 87.6168
+    Singapore:
+      timezone: Asia/Singapore
+      longitude: 103.8198
+    Tokyo:
+      timezone: Asia/Tokyo
+      longitude: 139.6917
+    浙江杭州:
+      timezone: Asia/Shanghai
+      longitude: 120.1551
+    上海:
+      timezone: Asia/Shanghai
+      longitude: 121.4737
+    乌鲁木齐:
+      timezone: Asia/Shanghai
+      longitude: 87.6168
+    新加坡:
+      timezone: Asia/Singapore
+      longitude: 103.8198
+    东京:
+      timezone: Asia/Tokyo
+      longitude: 139.6917

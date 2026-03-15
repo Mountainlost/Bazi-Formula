@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  windows-py310:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: "utf-8"
+      PIP_NO_BUILD_ISOLATION: "1"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install project
+        run: python -m pip install -e .[dev]
+
+      - name: Run pytest
+        run: pytest
+
+      - name: Run deterministic pipeline
+        run: |
+          python -m bazi.cli calc --input 用户输入/user_001.json
+          python -m bazi.cli judge --chart 输出结果/chart.json
+          python -m bazi.cli report --chart 输出结果/chart.json --rules 输出结果/rules.json
+          python -m bazi.cli audit --chart 输出结果/chart.json --rules 输出结果/rules.json --report 输出结果/report.json

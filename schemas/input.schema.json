@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BaziInput",
+  "description": "Phase 1 input schema for the deterministic bazi skeleton.",
+  "type": "object",
+  "required": [
+    "birth_date",
+    "birth_time",
+    "birth_place",
+    "gender",
+    "calendar_type",
+    "timezone",
+    "true_solar_time",
+    "school"
+  ],
+  "properties": {
+    "birth_date": {
+      "type": "string",
+      "description": "Birth date in YYYY-MM-DD format. When calendar_type=lunar, this is the lunar date without a leap-month marker.",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "birth_time": {
+      "type": "string",
+      "description": "Birth time in HH:MM format.",
+      "pattern": "^\\d{2}:\\d{2}$"
+    },
+    "birth_place": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gender": {
+      "type": "string",
+      "enum": ["male", "female", "other"]
+    },
+    "calendar_type": {
+      "type": "string",
+      "enum": ["solar", "lunar"]
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Supported in wide_input_v0 only for the explicit whitelist maintained in configs/input_normalization.yaml.",
+      "minLength": 1
+    },
+    "true_solar_time": {
+      "type": "boolean",
+      "description": "When true, calc uses the configured birth_place longitude whitelist before entering the existing solar calculation chain."
+    },
+    "school": {
+      "type": "string",
+      "enum": ["bazi_ziping_v1"]
+    },
+    "question": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

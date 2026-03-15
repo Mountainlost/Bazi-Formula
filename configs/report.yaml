@@ -1,0 +1,3 @@
+report_version: bazi-report-skeleton-v1
+style: strict
+require_evidence_refs: true

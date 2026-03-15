@@ -1,0 +1,284 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BaziReport",
+  "description": "Structured report output that only restates chart.json and rules.json.",
+  "type": "object",
+  "required": [
+    "report_version",
+    "engine_version",
+    "rules_version",
+    "status",
+    "summary",
+    "ten_gods_summary",
+    "strength_summary",
+    "pattern_system_summary",
+    "climate_balance_summary",
+    "annual_flow_summary",
+    "annual_reading_summary",
+    "career_reading_summary",
+    "relationship_reading_summary",
+    "shen_sha_summary",
+    "candidate_elements_summary",
+    "final_useful_god_summary",
+    "final_report_v0",
+    "luck_cycle_summary",
+    "caveats"
+  ],
+  "properties": {
+    "report_version": { "type": "string" },
+    "engine_version": { "type": "string" },
+    "rules_version": { "type": "string" },
+    "status": { "type": "string", "enum": ["ok"] },
+    "summary": {
+      "type": "object",
+      "required": ["text", "evidence_refs"],
+      "properties": {
+        "text": { "type": "string" },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ten_gods_summary": {
+      "type": "object",
+      "required": ["day_master", "stems_visible", "branches_hidden", "evidence_refs"],
+      "properties": {
+        "day_master": { "type": "string", "minLength": 1, "maxLength": 1 },
+        "stems_visible": {
+          "type": "array",
+          "minItems": 4,
+          "items": { "$ref": "rules.schema.json#/$defs/stemVisibleGod" }
+        },
+        "branches_hidden": {
+          "type": "array",
+          "minItems": 4,
+          "items": { "$ref": "rules.schema.json#/$defs/branchHiddenStems" }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "strength_summary": {
+      "type": "object",
+      "required": ["score", "label", "summary", "evidence_refs"],
+      "properties": {
+        "score": { "type": "integer" },
+        "label": { "type": "string", "enum": ["weak", "balanced", "strong"] },
+        "summary": { "type": "string", "enum": ["偏弱", "中和", "偏强"] },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "pattern_system_summary": {
+      "$ref": "rules.schema.json#/$defs/patternSystemOutput"
+    },
+    "climate_balance_summary": {
+      "$ref": "rules.schema.json#/$defs/climateBalanceOutput"
+    },
+    "annual_flow_summary": {
+      "$ref": "rules.schema.json#/$defs/annualFlowOutput"
+    },
+    "annual_reading_summary": {
+      "$ref": "rules.schema.json#/$defs/annualReadingOutput"
+    },
+    "career_reading_summary": {
+      "$ref": "rules.schema.json#/$defs/careerReadingOutput"
+    },
+    "relationship_reading_summary": {
+      "$ref": "rules.schema.json#/$defs/relationshipReadingOutput"
+    },
+    "shen_sha_summary": {
+      "$ref": "rules.schema.json#/$defs/shenShaOutput"
+    },
+    "candidate_elements_summary": {
+      "$ref": "rules.schema.json#/properties/provisional_conclusions"
+    },
+    "final_useful_god_summary": {
+      "type": "object",
+      "required": [
+        "status",
+        "confidence",
+        "primary_element",
+        "secondary_elements",
+        "text",
+        "evidence_refs"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "determined",
+            "insufficient_for_final_determination",
+            "blocked_by_conflict"
+          ]
+        },
+        "confidence": {
+          "type": "string",
+          "enum": ["low", "medium", "high"]
+        },
+        "primary_element": {
+          "type": ["string", "null"],
+          "enum": ["wood", "fire", "earth", "metal", "water", null]
+        },
+        "secondary_elements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["wood", "fire", "earth", "metal", "water"]
+          }
+        },
+        "text": { "type": "string" },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "final_report_v0": {
+      "type": "object",
+      "required": [
+        "method",
+        "summary",
+        "career",
+        "wealth",
+        "relationship",
+        "future_five_years",
+        "limitations",
+        "evidence_refs"
+      ],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["final_report_v0"]
+        },
+        "summary": {
+          "type": "object",
+          "required": ["text", "evidence_refs"],
+          "properties": {
+            "text": { "type": "string" },
+            "evidence_refs": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "career": {
+          "type": "object",
+          "required": ["text", "evidence_refs"],
+          "properties": {
+            "text": { "type": "string" },
+            "evidence_refs": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "wealth": {
+          "type": "object",
+          "required": ["text", "evidence_refs"],
+          "properties": {
+            "text": { "type": "string" },
+            "evidence_refs": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "relationship": {
+          "type": "object",
+          "required": ["text", "evidence_refs"],
+          "properties": {
+            "text": { "type": "string" },
+            "evidence_refs": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "future_five_years": {
+          "type": "object",
+          "required": ["overview", "entries", "evidence_refs"],
+          "properties": {
+            "overview": {
+              "type": "object",
+              "required": ["text", "evidence_refs"],
+              "properties": {
+                "text": { "type": "string" },
+                "evidence_refs": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": { "type": "string" }
+                }
+              },
+              "additionalProperties": false
+            },
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["year", "text", "evidence_refs"],
+                "properties": {
+                  "year": { "type": "integer" },
+                  "text": { "type": "string" },
+                  "evidence_refs": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": { "type": "string" }
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "evidence_refs": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": false
+        },
+        "limitations": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "rules.schema.json#/$defs/evidenceNote" }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "luck_cycle_summary": {
+      "$ref": "chart.schema.json#/$defs/luckCycle"
+    },
+    "caveats": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "rules.schema.json#/$defs/evidenceNote" }
+    }
+  },
+  "additionalProperties": false
+}

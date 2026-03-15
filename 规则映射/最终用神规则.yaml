@@ -1,0 +1,88 @@
+method: controlled_useful_god_v0
+
+element_labels:
+  wood: "木"
+  fire: "火"
+  earth: "土"
+  metal: "金"
+  water: "水"
+
+finalize_allowed_when:
+  disallow_strength_labels:
+    - balanced
+  require_favorable_candidate: true
+  require_candidate_alignment: true
+  require_month_bias_alignment: true
+  reject_overrepresented_element: true
+  min_support_score: 2
+  min_primary_gap: 8
+  max_secondary_elements: 1
+
+candidate_priority_rules:
+  strong:
+    produced_by_day_master: 30
+    controls_day_master: 20
+    controlled_by_day_master: 10
+  weak:
+    same_element: 30
+    produces_day_master: 20
+
+month_bias_alignment:
+  strong:
+    month_supports_day_master:
+      allowed_relations:
+        - produced_by_day_master
+        - controls_day_master
+    month_weakens_day_master:
+      allowed_relations:
+        - produced_by_day_master
+        - controls_day_master
+        - controlled_by_day_master
+  weak:
+    month_supports_day_master:
+      allowed_relations:
+        - same_element
+        - produces_day_master
+    month_weakens_day_master:
+      allowed_relations:
+        - same_element
+        - produces_day_master
+
+extra_system_required_relations:
+  strong:
+    - controlled_by_day_master
+  weak: []
+
+support_weights:
+  visible_stem: 2
+  hidden_stem: 1
+
+thresholds:
+  overrepresented_score: 5
+
+confidence_rules:
+  determined_without_secondary: high
+  determined_with_secondary: medium
+  unresolved_or_blocked: low
+
+statuses:
+  determined: determined
+  insufficient: insufficient_for_final_determination
+  blocked: blocked_by_conflict
+
+reason_texts:
+  strength_direction_strong: "当前日主偏强，最终用神仅考虑泄、制、耗方向的受限判定。"
+  strength_direction_weak: "当前日主偏弱，最终用神仅考虑扶、生日主方向的受限判定。"
+  month_bias_aligned: "月令偏置与当前主候选未冲突，可继续进入最终判定。"
+  candidate_supported: "候选{element_zh}在当前盘面仍有足够支持分值，可进入最终判定。"
+  unique_primary: "候选{element_zh}在优先级与支持度上具备明确主位。"
+  secondary_retained: "{element_zh}保留为次级辅助元素，不作为主用神。"
+  controlled_method_note: "当前为最终用神受控版 v0，仅在证据一致时给出结论。"
+  insufficient_balanced: "当前旺衰为中和，受控版 v0 不允许直接定最终用神。"
+  insufficient_no_candidate: "当前没有足够清晰的主候选，不能安全定最终用神。"
+  insufficient_support: "当前主候选{element_zh}支持度仍不足，不能安全定最终用神。"
+  insufficient_tied: "多个候选方向接近，当前规则不足以明确主次。"
+  insufficient_extra_system: "当前仍需格局或调候等未实现规则才能进一步分辨。"
+  conflict_alignment: "候选{element_zh}与当前强弱扶抑方向不一致。"
+  conflict_month_bias: "候选{element_zh}与月令偏置发生冲突。"
+  conflict_overrepresented: "候选{element_zh}在当前盘面已明显偏多，不宜定为最终用神。"

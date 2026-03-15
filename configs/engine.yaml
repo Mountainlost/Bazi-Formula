@@ -1,0 +1,5 @@
+engine_version: bazi-engine-real-calc-py310-v2
+school: bazi_ziping_v1
+default_timezone: Asia/Shanghai
+default_true_solar_time: false
+input_scope: wide_input_v0

@@ -1,0 +1,98 @@
+method: shen_sha_v0
+
+selected_keys:
+  - tianyi_guiren
+  - taohua
+  - yima
+  - wenchang
+  - huagai
+
+rules:
+  tianyi_guiren:
+    name: 天乙贵人
+    basis: day_stem
+    target_type: branch
+    mapping:
+      甲: [丑, 未]
+      戊: [丑, 未]
+      庚: [丑, 未]
+      乙: [子, 申]
+      己: [子, 申]
+      丙: [亥, 酉]
+      丁: [亥, 酉]
+      壬: [卯, 巳]
+      癸: [卯, 巳]
+      辛: [寅, 午]
+  taohua:
+    name: 桃花
+    basis: year_branch
+    target_type: branch
+    mapping:
+      申: [酉]
+      子: [酉]
+      辰: [酉]
+      寅: [卯]
+      午: [卯]
+      戌: [卯]
+      亥: [子]
+      卯: [子]
+      未: [子]
+      巳: [午]
+      酉: [午]
+      丑: [午]
+  yima:
+    name: 驿马
+    basis: year_branch
+    target_type: branch
+    mapping:
+      申: [寅]
+      子: [寅]
+      辰: [寅]
+      寅: [申]
+      午: [申]
+      戌: [申]
+      亥: [巳]
+      卯: [巳]
+      未: [巳]
+      巳: [亥]
+      酉: [亥]
+      丑: [亥]
+  wenchang:
+    name: 文昌
+    basis: day_stem
+    target_type: branch
+    mapping:
+      甲: [巳]
+      乙: [午]
+      丙: [申]
+      丁: [酉]
+      戊: [申]
+      己: [酉]
+      庚: [亥]
+      辛: [子]
+      壬: [寅]
+      癸: [卯]
+  huagai:
+    name: 华盖
+    basis: year_branch
+    target_type: branch
+    mapping:
+      申: [辰]
+      子: [辰]
+      辰: [辰]
+      寅: [戌]
+      午: [戌]
+      戌: [戌]
+      亥: [未]
+      卯: [未]
+      未: [未]
+      巳: [丑]
+      酉: [丑]
+      丑: [丑]
+
+reason_texts:
+  scope_note: 神煞受控版 v0 仅列示少量基础神煞命中，不代表综合吉凶定论。
+  structural_note: 当前神煞命中结果只表示规则映射成立，不与格局、调候、旺衰或用神结论联动。
+  determined: 已按受控规则检查所选基础神煞，当前命中结果仅作结构化列示。
+  no_hit: 已按受控规则检查所选基础神煞，当前未命中所选项目。
+  insufficient: 当前无法在受控神煞范围内完成稳定判定。

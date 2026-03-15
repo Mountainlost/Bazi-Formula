@@ -1,0 +1,67 @@
+method: candidate_only_v0
+
+weights:
+  visible_stem: 2
+  hidden_stem: 1
+
+thresholds:
+  overrepresented_score: 5
+  underrepresented_score: 1
+
+element_labels:
+  wood: 木
+  fire: 火
+  earth: 土
+  metal: 金
+  water: 水
+
+reason_fragments:
+  month_supports_day_master: 月令主气也在扶助日主，相关抑制方向优先级提高。
+  month_weakens_day_master: 月令主气对日主有制泄作用，相关扶助方向优先级提高。
+  element_overrepresented: 当前四柱中{element_zh}已偏多。
+  element_underrepresented: 当前四柱中{element_zh}偏少，可作为平衡观察。
+  balanced_note: 当前基础旺衰评分为中和，候选用神保持保守处理。
+  candidate_only_note: 当前仅输出候选级别，不等同最终用神判定，未展开格局与调候。
+
+labels:
+  strong:
+    max_candidates: 2
+    evidence_refs: [E201, E202]
+    favorable_relations:
+      - produced_by_day_master
+      - controls_day_master
+      - controlled_by_day_master
+    unfavorable_relations:
+      - same_element
+      - produces_day_master
+    favorable_templates:
+      produced_by_day_master: 当前日主{summary}，{element_zh}可泄日主之气，作为候选观察。
+      controls_day_master: 当前日主{summary}，{element_zh}可制约日主，作为候选观察。
+      controlled_by_day_master: 当前日主{summary}，{element_zh}可分担日主之力，作为候选观察。
+    unfavorable_templates:
+      same_element: 当前日主{summary}，同类{element_zh}再增可能进一步偏旺。
+      produces_day_master: 当前日主{summary}，生扶类{element_zh}再增可能继续助旺。
+  weak:
+    max_candidates: 2
+    evidence_refs: [E201, E203]
+    favorable_relations:
+      - same_element
+      - produces_day_master
+    unfavorable_relations:
+      - controls_day_master
+      - produced_by_day_master
+      - controlled_by_day_master
+    favorable_templates:
+      same_element: 当前日主{summary}，同类{element_zh}可直接扶助日主，作为候选观察。
+      produces_day_master: 当前日主{summary}，生扶类{element_zh}可补助日主，作为候选观察。
+    unfavorable_templates:
+      controls_day_master: 当前日主{summary}，{element_zh}继续制日主，暂不宜优先考虑。
+      produced_by_day_master: 当前日主{summary}，{element_zh}会继续泄日主之气，暂不宜优先考虑。
+      controlled_by_day_master: 当前日主{summary}，{element_zh}会继续耗日主之力，暂不宜优先考虑。
+  balanced:
+    max_candidates: 0
+    evidence_refs: [E201, E204]
+    favorable_relations: []
+    unfavorable_relations: []
+    favorable_templates: {}
+    unfavorable_templates: {}

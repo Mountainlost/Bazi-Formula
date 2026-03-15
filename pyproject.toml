@@ -1,0 +1,45 @@
+[build-system]
+requires = []
+build-backend = "local_backend"
+backend-path = ["backend"]
+
+[project]
+name = "bazi-formula"
+version = "0.3.0"
+description = "Deterministic and auditable bazi project skeleton for Windows and Python 3.10"
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ["bazi", "ziping", "deterministic", "auditable"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Operating System :: Microsoft :: Windows",
+  "Intended Audience :: Developers",
+  "Typing :: Typed",
+]
+dependencies = [
+  "lunar_python>=1.4.8,<2",
+  "pydantic>=2.7,<3",
+  "PyYAML>=6,<7",
+  "typer>=0.12,<0.13",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<9",
+]
+
+[project.scripts]
+bazi = "bazi.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["bazi*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"

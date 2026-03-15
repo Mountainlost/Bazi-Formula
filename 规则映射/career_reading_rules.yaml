@@ -1,0 +1,105 @@
+method: career_reading_v0
+
+career_support_gods:
+  core: [正官, 七杀]
+  resource: [正印, 偏印]
+  output: [食神, 伤官]
+  wealth: [正财, 偏财]
+
+related_shen_sha_keys:
+  - tianyi_guiren
+  - wenchang
+
+score_weights:
+  base_core_visible: 2
+  base_core_hidden: 1
+  base_resource_visible: 2
+  base_resource_hidden: 1
+  base_output_visible: 1
+  base_output_hidden: 1
+  base_wealth_visible: 1
+  base_wealth_hidden: 1
+  base_day_branch_bonus: 1
+  base_supportive_alignment: 2
+  base_unfavorable_alignment_penalty: -2
+  base_pattern_bonus: 1
+  base_climate_support_bonus: 1
+  base_weak_unaligned_penalty: -2
+  resource_visible_presence: 1
+  resource_hidden_presence: 1
+  resource_core_visible_presence: 1
+  resource_tianyi_auxiliary: 1
+  resource_wenchang_auxiliary: 1
+  resource_current_mentor_favorable: 2
+  resource_current_mentor_positive: 1
+  resource_current_career_favorable: 1
+  resource_current_career_positive: 1
+  resource_current_career_cautious: -1
+  resource_current_career_challenging: -2
+  future_favorable_year: 2
+  future_positive_year: 1
+  future_mixed_year: 0
+  future_cautious_year: -1
+  future_challenging_year: -2
+  future_base_support_bonus: 1
+
+thresholds:
+  base_support_favorable_min: 12
+  base_support_positive_min: 8
+  base_support_cautious_max: 3
+  base_support_challenging_max: 1
+  resource_support_favorable_min: 5
+  resource_support_positive_min: 3
+  resource_support_cautious_max: 0
+  resource_support_challenging_max: -1
+  future_favorable_min: 5
+  future_positive_min: 2
+  future_cautious_max: 0
+  future_challenging_max: -1
+
+phase_mapping:
+  favorable: active
+  positive: active
+  mixed: steady
+  cautious: cautious
+  challenging: cautious
+
+growth_mode_rules:
+  active_breakthrough_phases: [active]
+  leverage_support_resource_signals: [positive, favorable]
+  leverage_support_future_signals: [positive, favorable]
+
+signal_texts:
+  base_support:
+    favorable: 命局层面的事业基础支撑较强。
+    positive: 命局层面的事业基础支撑尚可。
+    mixed: 命局层面的事业基础有一定支撑，但仍有分化。
+    cautious: 命局层面的事业基础偏谨慎。
+    challenging: 命局层面的事业基础支撑偏弱。
+  current_phase:
+    active: 当前阶段更适合主动争取机会。
+    steady: 当前阶段宜稳中求进，可边推进边看反馈。
+    cautious: 当前阶段宜稳中求进，先稳住节奏再择机发力。
+  growth_mode:
+    steady_build: 更适合稳态积累，先把基础和节奏打稳。
+    leverage_support: 更适合借力提升，可先连接资源与协助再逐步放大。
+    active_breakthrough: 更适合主动突破，但仍不展开具体事件预测。
+  future_tendency:
+    favorable: 未来几年事业推进机会较多。
+    positive: 未来几年事业推进空间有所增加。
+    mixed: 未来几年事业推进信号有起伏，宜分阶段推进。
+    cautious: 未来几年事业推进仍需谨慎。
+    challenging: 未来几年事业阻力偏大，宜先稳住基本盘。
+  resource_support:
+    favorable: 外部资源与助力对事业的支持较明显。
+    positive: 外部资源与助力对事业有一定支持。
+    mixed: 外部资源与助力存在，但仍需主动经营。
+    cautious: 外部资源支持有限，宜先靠稳态积累。
+    challenging: 外部资源支持偏弱，宜谨慎扩张。
+
+reason_texts:
+  scope_note: 事业专项受控版 v0 只使用既有十神结构、扶抑层与未来五年事业信号做整合判断，不展开完整传统事业体系。
+  shen_sha_auxiliary_note: 事业相关神煞命中只作辅助提示，不能单独推出事业结论。
+  future_window_note: 未来倾向只汇总 annual_reading_v0 的既有事业与助力信号，不新增流月、流日或事件预测。
+  determined: 已基于事业相关十神结构、既有扶抑层、当前阶段与未来五年事业信号，输出事业专项受控结论。
+  insufficient: 现有结构不足以稳定生成事业专项判断，当前保守留空。

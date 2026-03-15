@@ -1,0 +1,187 @@
+method: climate_balance_v0
+
+weights:
+  visible_stem: 2
+  hidden_stem: 1
+
+thresholds:
+  hot: 5
+  cold: 6
+  dry: 8
+  damp: 8
+  min_gap: 3
+  determined_min_supported_adjustments: 2
+
+element_labels:
+  wood: 木
+  fire: 火
+  earth: 土
+  metal: 金
+  water: 水
+
+direction_labels:
+  warming: 温暖
+  cooling: 清凉
+  moistening: 润泽
+  drying: 燥化
+
+tendency_labels:
+  hot: 热
+  cold: 寒
+  dry: 燥
+  damp: 湿
+
+bias_groups:
+  hot: [fire]
+  cold: [water, metal]
+  dry: [metal, earth]
+  damp: [water, wood]
+
+support_map:
+  warming: [cold]
+  cooling: [hot]
+  moistening: [dry]
+  drying: [damp]
+
+seasons:
+  寅:
+    season: spring
+    season_name: 春
+    baseline_tendencies: [damp]
+    default_adjustments:
+      - element: earth
+        direction: drying
+        priority: 1
+      - element: fire
+        direction: warming
+        priority: 2
+  卯:
+    season: spring
+    season_name: 春
+    baseline_tendencies: [damp]
+    default_adjustments:
+      - element: earth
+        direction: drying
+        priority: 1
+      - element: fire
+        direction: warming
+        priority: 2
+  辰:
+    season: spring
+    season_name: 春
+    baseline_tendencies: [damp]
+    default_adjustments:
+      - element: earth
+        direction: drying
+        priority: 1
+      - element: fire
+        direction: warming
+        priority: 2
+  巳:
+    season: summer
+    season_name: 夏
+    baseline_tendencies: [hot, damp]
+    default_adjustments:
+      - element: water
+        direction: cooling
+        priority: 1
+      - element: earth
+        direction: drying
+        priority: 2
+  午:
+    season: summer
+    season_name: 夏
+    baseline_tendencies: [hot, damp]
+    default_adjustments:
+      - element: water
+        direction: cooling
+        priority: 1
+      - element: earth
+        direction: drying
+        priority: 2
+  未:
+    season: summer
+    season_name: 夏
+    baseline_tendencies: [hot, damp]
+    default_adjustments:
+      - element: water
+        direction: cooling
+        priority: 1
+      - element: earth
+        direction: drying
+        priority: 2
+  申:
+    season: autumn
+    season_name: 秋
+    baseline_tendencies: [cold, dry]
+    default_adjustments:
+      - element: fire
+        direction: warming
+        priority: 1
+      - element: water
+        direction: moistening
+        priority: 2
+  酉:
+    season: autumn
+    season_name: 秋
+    baseline_tendencies: [cold, dry]
+    default_adjustments:
+      - element: fire
+        direction: warming
+        priority: 1
+      - element: water
+        direction: moistening
+        priority: 2
+  戌:
+    season: autumn
+    season_name: 秋
+    baseline_tendencies: [cold, dry]
+    default_adjustments:
+      - element: fire
+        direction: warming
+        priority: 1
+      - element: water
+        direction: moistening
+        priority: 2
+  亥:
+    season: winter
+    season_name: 冬
+    baseline_tendencies: [cold, damp]
+    default_adjustments:
+      - element: fire
+        direction: warming
+        priority: 1
+      - element: earth
+        direction: drying
+        priority: 2
+  子:
+    season: winter
+    season_name: 冬
+    baseline_tendencies: [cold, damp]
+    default_adjustments:
+      - element: fire
+        direction: warming
+        priority: 1
+      - element: earth
+        direction: drying
+        priority: 2
+  丑:
+    season: winter
+    season_name: 冬
+    baseline_tendencies: [cold, damp]
+    default_adjustments:
+      - element: fire
+        direction: warming
+        priority: 1
+      - element: earth
+        direction: drying
+        priority: 2
+
+reason_texts:
+  scope_note: 调候受控版 v0 只输出季节寒暖燥湿候选建议，不等同最终用神，也不展开完整传统调候体系。
+  candidate_boundary_note: 调候候选只在当前独立层内成立，不能覆盖既有强弱、格局与用神结论。
+  adjustment: 月支{month_branch}归于{season_name}季，当前季节背景偏{tendencies}，可先将{element_name}作为{direction_name}方向的调候候选。
+  bias_support: 当前五行分布对{direction_name}方向有额外支持。
+  determined: 月支季节背景与五行分布信号一致，当前调候候选可维持 determined。
+  candidate_only: 当前仅能依据月支季节背景给出调候候选，五行分布信号不足以提升确定性。
+  insufficient: 当前无法根据月支季节背景稳定形成调候建议。

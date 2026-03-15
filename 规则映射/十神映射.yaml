@@ -1,0 +1,35 @@
+stems:
+  甲: {element: wood, polarity: yang}
+  乙: {element: wood, polarity: yin}
+  丙: {element: fire, polarity: yang}
+  丁: {element: fire, polarity: yin}
+  戊: {element: earth, polarity: yang}
+  己: {element: earth, polarity: yin}
+  庚: {element: metal, polarity: yang}
+  辛: {element: metal, polarity: yin}
+  壬: {element: water, polarity: yang}
+  癸: {element: water, polarity: yin}
+
+elements:
+  wood: {generates: fire, controls: earth}
+  fire: {generates: earth, controls: metal}
+  earth: {generates: metal, controls: water}
+  metal: {generates: water, controls: wood}
+  water: {generates: wood, controls: fire}
+
+ten_gods:
+  same_element:
+    same_polarity: 比肩
+    opposite_polarity: 劫财
+  produced_by_day_master:
+    same_polarity: 食神
+    opposite_polarity: 伤官
+  controlled_by_day_master:
+    same_polarity: 偏财
+    opposite_polarity: 正财
+  controls_day_master:
+    same_polarity: 七杀
+    opposite_polarity: 正官
+  produces_day_master:
+    same_polarity: 偏印
+    opposite_polarity: 正印

@@ -1,0 +1,83 @@
+method: final_report_v0
+
+element_labels:
+  wood: 木
+  fire: 火
+  earth: 土
+  metal: 金
+  water: 水
+
+strength_texts:
+  weak:
+    summary: 当前旺衰评分为偏弱，阅读后续问题时应优先参考扶助方向。
+    career: 事业部分当前优先参考扶助类结论，不把泄耗类方向当作主线。
+    wealth: 财运部分当前优先参考扶助类结论，不把泄耗类方向当作主线。
+    relationship: 婚恋部分当前优先参考扶助类结论，不把泄耗类方向当作主线。
+  balanced:
+    summary: 当前旺衰评分为中和，后续问题需要保持保守，不宜强行放大某一方向。
+    career: 事业部分当前以保守阅读为主，不宜强行放大单一方向。
+    wealth: 财运部分当前以保守阅读为主，不宜强行放大单一方向。
+    relationship: 婚恋部分当前以保守阅读为主，不宜强行放大单一方向。
+  strong:
+    summary: 当前旺衰评分为偏强，阅读后续问题时应优先区分泄耗与制化方向。
+    career: 事业部分当前优先区分泄耗与制化方向，不把继续助旺当作主线。
+    wealth: 财运部分当前优先区分泄耗与制化方向，不把继续助旺当作主线。
+    relationship: 婚恋部分当前优先区分泄耗与制化方向，不把继续助旺当作主线。
+
+candidate_texts:
+  favorable: 候选扶助方向当前偏向{elements}。
+  unfavorable: 当前暂不优先方向为{elements}。
+  empty: 当前候选层证据有限，暂未形成稳定候选列表。
+
+final_useful_god_texts:
+  determined: 最终用神受控版 v0 当前判为{primary_element}{secondary_clause}。
+  insufficient_for_final_determination: 最终用神受控版 v0 当前证据不足，不能安全下结论。
+  blocked_by_conflict: 最终用神受控版 v0 当前存在冲突，不能安全下结论。
+
+pattern_texts:
+  determined: 格局层当前识别为{pattern_name}，但受控版 v1 仍只覆盖月令主气格。
+  candidate_only: 格局层当前仅保留{pattern_name}候选，不能单凭这一层下定型结论。
+  insufficient_for_determination: 格局层当前不足以判断，应保持保守。
+
+climate_texts:
+  determined: 调候层给出{elements}方向的独立建议，但它不等同最终用神。
+  candidate_only: 调候层给出{elements}方向的候选建议，只能作为环境平衡提示。
+  insufficient_for_determination: 调候层当前证据不足，暂不展开额外解释。
+
+shen_sha_texts:
+  hit: 神煞层当前列示{hit_names}命中，仅作结构化补充，不作吉凶裁决。
+  no_hit: 神煞层当前未见受控范围内命中，不能因此外推吉凶。
+
+annual_flow_texts:
+  determined: 流年层当前仅列出{start_year}-{end_year}的干支骨架，不能据此直接下年份吉凶或事件判断。
+  insufficient_for_determination: 流年层当前不足以形成固定预览窗口。
+
+section_prefixes:
+  summary: 当前规则下，
+  career: 事业部分当前只基于既有规则做受控整合。
+  wealth: 财运部分当前只基于既有规则做受控整合。
+  relationship: 婚恋部分当前只基于既有规则做受控整合。
+
+future_five_years:
+  overview_prefix: 未来五年阅读当前只基于既有规则做受控整合。
+  career_years_template: 事业更值得主动推进的年份偏向{years}。
+  wealth_years_template: 财务机会偏多的年份偏向{years}。
+  mentor_years_template: 外部助力与贵人助力偏强的年份偏向{years}。
+  relationship_years_template: 婚恋推进信号较强的年份偏向{years}，但仍不作事件断定。
+  fallback_template: 当前五年窗口内未见需要单独放大的强倾向年份，应逐年查看结构化信号并保持谨慎。
+  entry_template: "{year}年（{ganzhi}）：{summary}"
+
+relationship_limit_note: 当前婚恋专项为受控版 v0，只基于既有结构化规则做判断，不展开具体事件预测。
+career_limit_note: 当前事业专项为受控版 v0，只基于既有结构化规则做判断，不展开具体事件预测。
+
+limitations:
+  - text: 当前格局体系仍只覆盖月令主气格，不扩展完整格局体系。
+    evidence_refs: [E405, E804]
+  - text: 调候层当前为独立候选层，不等同最终用神，也不覆盖完整传统调候体系。
+    evidence_refs: [E507, E506, E804]
+  - text: 神煞层当前仅做结构化列示，不输出综合吉凶结论。
+    evidence_refs: [E601, E604, E804]
+  - text: 流年层当前仅输出固定窗口的干支骨架，不包含流月、断事与事件预测。
+    evidence_refs: [E704, E804]
+  - text: 当前最终用神仍为受控版 v0，报告只转述现有规则结果，不替代完整传统命理体系。
+    evidence_refs: [E306, E201, E804]

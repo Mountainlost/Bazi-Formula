@@ -1,0 +1,580 @@
+- id: E101
+  module: strength
+  rule_name: month_order_primary_weight
+  description: Month order primary weight for strength scoring.
+  source_name: ziping_basic_rules
+  enabled: true
+
+- id: E102
+  module: strength
+  rule_name: visible_support_strengthens_day_master
+  description: Visible support stems strengthen the day master.
+  source_name: ziping_basic_rules
+  enabled: true
+
+- id: E103
+  module: strength
+  rule_name: visible_drain_control_weakens_day_master
+  description: Visible drain and control stems weaken the day master.
+  source_name: ziping_basic_rules
+  enabled: true
+
+- id: E104
+  module: ten_gods
+  rule_name: hidden_stems_as_root_support
+  description: Hidden stems provide root support evidence.
+  source_name: ziping_basic_rules
+  enabled: true
+
+- id: E105
+  module: ten_gods
+  rule_name: visible_stems_prioritized
+  description: Visible stems are prioritized over hidden information.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E106
+  module: ten_gods
+  rule_name: ten_gods_from_day_master_relation
+  description: Ten gods are derived from day master relations.
+  source_name: ziping_basic_rules
+  enabled: true
+
+- id: E107
+  module: judge
+  rule_name: insufficient_evidence_fallback
+  description: Insufficient evidence must fall back conservatively.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E201
+  module: candidate
+  rule_name: candidate_only_v0_not_definitive
+  description: Candidate useful gods are not final conclusions.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E202
+  module: candidate
+  rule_name: strong_prefers_drain_control_consume
+  description: Strong day masters prefer drain, control, and consume directions.
+  source_name: ziping_basic_rules
+  enabled: true
+
+- id: E203
+  module: candidate
+  rule_name: weak_prefers_support_resource
+  description: Weak day masters prefer support and resource directions.
+  source_name: ziping_basic_rules
+  enabled: true
+
+- id: E204
+  module: candidate
+  rule_name: balanced_state_conservative
+  description: Balanced state keeps candidate output conservative.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E205
+  module: candidate
+  rule_name: month_order_bias_for_candidates
+  description: Month order bias can raise candidate priority.
+  source_name: ziping_basic_rules
+  enabled: true
+
+- id: E206
+  module: candidate
+  rule_name: element_distribution_filter
+  description: Element distribution can filter candidate choices.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E207
+  module: luck_cycle
+  rule_name: direction_rule
+  description: Luck cycle direction uses the configured single-rule policy.
+  source_name: ziping_basic_rules
+  enabled: true
+
+- id: E208
+  module: luck_cycle
+  rule_name: start_age_conversion_rule
+  description: Luck cycle start age uses the configured conversion rule.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E209
+  module: luck_cycle
+  rule_name: cycle_progression_from_month_pillar
+  description: Luck cycles progress from the month pillar basis.
+  source_name: ziping_basic_rules
+  enabled: true
+
+- id: E210
+  module: calc
+  rule_name: timezone_whitelist_wide_input_v0
+  description: Wide input v0 supports only an explicit timezone whitelist.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E211
+  module: calc
+  rule_name: lunar_input_normalized_before_calc
+  description: Lunar input is normalized to solar before entering the stable calc chain.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E212
+  module: calc
+  rule_name: ambiguous_leap_lunar_month_rejected
+  description: Ambiguous leap-month lunar input must fail conservatively.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E213
+  module: calc
+  rule_name: true_solar_time_requires_place_longitude_whitelist
+  description: True solar time requires a configured birth-place longitude whitelist.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E214
+  module: calc
+  rule_name: true_solar_time_uses_meridian_and_equation_of_time
+  description: True solar time uses standard meridian and equation-of-time correction.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E301
+  module: final_useful_god
+  rule_name: final_must_follow_strength_direction
+  description: Final useful god must follow the strength direction.
+  source_name: ziping_basic_rules
+  enabled: true
+
+- id: E302
+  module: final_useful_god
+  rule_name: balanced_not_allowed_to_finalize
+  description: Balanced strength is not allowed to finalize the useful god.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E303
+  module: final_useful_god
+  rule_name: multiple_candidates_require_clear_order
+  description: Multiple candidates require a clear ordering before finalization.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E304
+  module: final_useful_god
+  rule_name: overrepresented_element_not_final
+  description: Overrepresented elements cannot be finalized as the useful god.
+  source_name: ziping_basic_rules
+  enabled: true
+
+- id: E305
+  module: final_useful_god
+  rule_name: month_bias_is_constraint
+  description: Month bias remains a constraint in final useful god control.
+  source_name: ziping_basic_rules
+  enabled: true
+
+- id: E306
+  module: final_useful_god
+  rule_name: limited_finalization_without_pattern_and_climate
+  description: Finalization remains limited when pattern and climate are not implemented.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E307
+  module: final_useful_god
+  rule_name: conflict_must_block_or_insufficient
+  description: Conflict must produce blocked or insufficient status.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E308
+  module: final_useful_god
+  rule_name: unique_primary_candidate_required
+  description: A unique primary candidate is required for controlled finalization.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E401
+  module: pattern
+  rule_name: month_main_qi_uses_first_hidden_stem
+  description: Month-main-qi pattern v1 uses the first hidden stem of the month branch as the main qi source.
+  source_name: ziping_basic_rules
+  enabled: true
+
+- id: E402
+  module: pattern
+  rule_name: month_main_qi_ten_god_maps_to_controlled_pattern_key
+  description: The ten-god relation of the month main qi maps to a controlled month-pattern key.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E403
+  module: pattern
+  rule_name: visible_same_god_supports_final_pattern
+  description: A visible stem with the same ten-god relation can raise the month-main-qi pattern from candidate to final.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E404
+  module: pattern
+  rule_name: hidden_main_qi_remains_candidate_only
+  description: Without visible same-god support, the month-main-qi pattern remains candidate_only.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E405
+  module: pattern
+  rule_name: month_main_qi_pattern_scope_limit_v1
+  description: Pattern system v1 is limited to month-main-qi identification and does not expand to complex pattern families.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E501
+  module: climate
+  rule_name: month_branch_maps_to_season_context
+  description: Climate balance v0 derives season context directly from the month branch.
+  source_name: ziping_basic_rules
+  enabled: true
+
+- id: E502
+  module: climate
+  rule_name: season_context_sets_default_adjustments
+  description: Climate balance v0 uses a controlled seasonal mapping to produce default adjustment candidates.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E503
+  module: climate
+  rule_name: element_distribution_supports_climate_bias
+  description: A lightweight five-element distribution signal may support climate tendencies such as cold, hot, dry, or damp.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E504
+  module: climate
+  rule_name: season_and_distribution_allow_determined_status
+  description: Climate balance v0 reaches determined only when seasonal context and distribution signals support the same adjustment directions.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E505
+  module: climate
+  rule_name: climate_conservative_fallback
+  description: When climate evidence is weak, the output must remain candidate_only or insufficient_for_determination.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E506
+  module: climate
+  rule_name: climate_candidates_not_final_useful_god
+  description: Climate adjustment candidates are independent suggestions and must not be treated as final useful god.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E507
+  module: climate
+  rule_name: climate_scope_limit_v0
+  description: Climate balance v0 is limited to seasonal hot-cold-dry-damp guidance and does not implement the full traditional climate system.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E601
+  module: shen_sha
+  rule_name: shen_sha_scope_limit_v0
+  description: Shen sha v0 is limited to a small controlled set of structural hits and does not imply comprehensive fortune judgment.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E602
+  module: shen_sha
+  rule_name: shen_sha_uses_fixed_basis_mapping
+  description: Each supported shen sha uses a fixed basis and explicit mapping table for local determination.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E603
+  module: shen_sha
+  rule_name: shen_sha_requires_explicit_pillar_match
+  description: A shen sha hit is recorded only when a mapped target explicitly matches one of the four pillars.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E604
+  module: shen_sha
+  rule_name: shen_sha_structured_hit_listing_only
+  description: Shen sha v0 outputs only a structured hit list and does not expand to full verdict text.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E605
+  module: shen_sha
+  rule_name: shen_sha_independent_from_other_layers
+  description: Shen sha hits remain independent from strength, pattern, climate, candidate elements, and final useful god.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E701
+  module: annual_flow
+  rule_name: annual_flow_window_starts_from_first_luck_cycle_year
+  description: Annual flow v0 starts its fixed preview window from the first luck cycle start_year.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E702
+  module: annual_flow
+  rule_name: annual_flow_advances_from_birth_year_pillar
+  description: Annual flow v0 advances the sexagenary year sequence from the birth year pillar using whole-year offsets.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E703
+  module: annual_flow
+  rule_name: annual_flow_fixed_ten_year_preview
+  description: Annual flow v0 outputs a deterministic fixed ten-year preview window.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E704
+  module: annual_flow
+  rule_name: annual_flow_scope_limit_v0
+  description: Annual flow v0 is limited to structured ganzhi sequencing and does not imply verdict, event timing, or monthly expansion.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E801
+  module: report
+  rule_name: final_report_v0_controlled_restatement
+  description: final_report_v0 is a controlled restatement layer built only from chart.json and rules.json.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E802
+  module: report
+  rule_name: final_report_v0_question_sections_from_existing_layers
+  description: Career, wealth, and relationship sections must be assembled only from registered existing rule layers.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E803
+  module: report
+  rule_name: final_report_v0_preserves_candidate_final_boundaries
+  description: final_report_v0 must preserve candidate-versus-final boundaries and must not upgrade independent layers into final verdicts.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E804
+  module: report
+  rule_name: final_report_v0_discloses_scope_limitations
+  description: final_report_v0 must disclose the controlled scope and unfinished areas of the current system.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E805
+  module: report
+  rule_name: final_report_v0_future_five_years_from_annual_reading
+  description: final_report_v0 future_five_years must be restated only from annual_reading_v0 and existing structured layers.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E806
+  module: report
+  rule_name: final_report_v0_future_five_years_no_absolute_verdict
+  description: final_report_v0 future_five_years must remain a controlled tendency reading and must not promise specific events.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E807
+  module: report
+  rule_name: final_report_v0_future_five_years_dimension_specific_highlights
+  description: final_report_v0 future_five_years may separately highlight career, wealth, relationship, and mentor years only from annual_reading_v0 signals.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E901
+  module: annual_reading
+  rule_name: annual_reading_reference_year_fixed_for_v0
+  description: annual_reading_v0 uses a fixed project reference year to keep the future window deterministic and auditable.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E902
+  module: annual_reading
+  rule_name: annual_reading_consecutive_five_year_window
+  description: annual_reading_v0 outputs a deterministic consecutive five-year window from the configured reference year.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E903
+  module: annual_reading
+  rule_name: annual_reading_uses_existing_rule_alignment_only
+  description: annual_reading_v0 derives lightweight signals only from existing useful-god, candidate, climate, annual-flow, and luck-cycle structures.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E904
+  module: annual_reading
+  rule_name: annual_reading_mentor_signal_uses_existing_tianyi_mapping_only
+  description: annual_reading_v0 mentor signals use only the existing tianyi-guiren mapping as a structural aid indicator.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E905
+  module: annual_reading
+  rule_name: annual_reading_summary_is_not_event_prediction
+  description: annual_reading_v0 summaries must stay at the level of controlled signals and must not become event prediction.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E906
+  module: annual_reading
+  rule_name: annual_reading_scope_limit_v0
+  description: annual_reading_v0 is limited to future-five-year tendency labels and does not implement full annual verdict logic.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E907
+  module: annual_reading
+  rule_name: annual_reading_uses_active_luck_cycle_context
+  description: annual_reading_v0 may use the active luck-cycle context as a lightweight supporting factor without overriding other layers.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E908
+  module: annual_reading
+  rule_name: annual_reading_controlled_qualitative_scale
+  description: annual_reading_v0 maps existing deterministic scores into a controlled multi-level qualitative scale without turning the layer into event prediction.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E808
+  module: report
+  rule_name: final_report_v0_relationship_from_relationship_reading
+  description: final_report_v0 relationship section must be restated from relationship_reading_v0 and must not bypass that controlled layer.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E809
+  module: report
+  rule_name: final_report_v0_relationship_no_absolute_verdict
+  description: final_report_v0 relationship section may express tendency but must not become an event guarantee.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E810
+  module: report
+  rule_name: final_report_v0_career_from_career_reading
+  description: final_report_v0 career section must be restated from career_reading_v0 and must not bypass that controlled layer.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E811
+  module: report
+  rule_name: final_report_v0_career_no_absolute_verdict
+  description: final_report_v0 career section may express tendency but must not become an event guarantee.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1101
+  module: career_reading
+  rule_name: career_reading_scope_limit_v0
+  description: career_reading_v0 is a controlled career layer built from existing structures and does not implement the full traditional career system.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1102
+  module: career_reading
+  rule_name: career_reading_uses_existing_career_god_structure
+  description: career_reading_v0 may use a small controlled set of career-related ten-god categories such as official, resource, output, and wealth as structural signals.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1103
+  module: career_reading
+  rule_name: career_reading_uses_existing_support_layers
+  description: career_reading_v0 may combine existing ten-god structure, final useful god, pattern, climate, and controlled shen sha signals without overriding those layers.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1104
+  module: career_reading
+  rule_name: career_reading_uses_current_phase_and_future_window
+  description: career_reading_v0 may summarize the current phase and near-future tendency only from the existing annual reading window and current luck-cycle context.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1105
+  module: career_reading
+  rule_name: career_reading_shen_sha_auxiliary_only
+  description: Any shen sha signal used by career_reading_v0 must remain auxiliary and cannot independently decide the conclusion.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1106
+  module: career_reading
+  rule_name: career_reading_not_event_prediction
+  description: career_reading_v0 may state controlled tendencies such as active or cautious phases but must not predict a guaranteed promotion or career event.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1107
+  module: career_reading
+  rule_name: career_reading_growth_mode_from_controlled_signals
+  description: career_reading_v0 growth_mode must be derived only from existing controlled signals such as current phase, future tendency, and resource support.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1001
+  module: relationship_reading
+  rule_name: relationship_reading_scope_limit_v0
+  description: relationship_reading_v0 is a controlled relationship layer built from existing structures and does not implement the full traditional relationship system.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1002
+  module: relationship_reading
+  rule_name: relationship_reading_uses_controlled_gender_mapping
+  description: relationship_reading_v0 may use a small controlled mapping between gender and relationship-related ten-god categories.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1003
+  module: relationship_reading
+  rule_name: relationship_reading_uses_existing_support_layers
+  description: relationship_reading_v0 may combine existing ten-god structure, final useful god, pattern, climate, and controlled shen sha signals without overriding those layers.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1004
+  module: relationship_reading
+  rule_name: relationship_reading_uses_current_phase_and_future_window
+  description: relationship_reading_v0 may summarize the current phase and near-future tendency only from the existing annual reading window and current luck-cycle context.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1005
+  module: relationship_reading
+  rule_name: relationship_reading_shen_sha_auxiliary_only
+  description: Any shen sha signal used by relationship_reading_v0 must remain auxiliary and cannot independently decide the conclusion.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1006
+  module: relationship_reading
+  rule_name: relationship_reading_not_event_prediction
+  description: relationship_reading_v0 may state controlled tendencies such as active or cautious phases but must not predict a guaranteed marriage event.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1007
+  module: relationship_reading
+  rule_name: relationship_reading_current_phase_from_annual_reading
+  description: relationship_reading_v0 may anchor the current phase to the existing annual_reading_v0 relationship signal instead of creating a separate timing system.
+  source_name: project_internal_rules
+  enabled: true

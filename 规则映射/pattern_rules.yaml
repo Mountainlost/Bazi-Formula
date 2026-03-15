@@ -1,0 +1,40 @@
+method: month_main_qi_pattern_v1
+final_method: month_main_qi_visible_support_v1
+
+pattern_map:
+  比肩:
+    pattern_key: yuebi
+    pattern_name: 月比格
+  劫财:
+    pattern_key: yuejie
+    pattern_name: 月劫格
+  食神:
+    pattern_key: yueshishen
+    pattern_name: 月食神格
+  伤官:
+    pattern_key: yueshangguan
+    pattern_name: 月伤官格
+  正财:
+    pattern_key: yuezhengcai
+    pattern_name: 月正财格
+  偏财:
+    pattern_key: yuepiancai
+    pattern_name: 月偏财格
+  正官:
+    pattern_key: yuezhengguan
+    pattern_name: 月正官格
+  七杀:
+    pattern_key: yueqisha
+    pattern_name: 月七杀格
+  正印:
+    pattern_key: yuezhengyin
+    pattern_name: 月正印格
+  偏印:
+    pattern_key: yuepianyin
+    pattern_name: 月偏印格
+
+reason_texts:
+  scope_note: 当前格局体系受控版 v1 仅识别月令主气格，不扩展到复杂格局、调候、神煞或流年流月。
+  determined: 月令主气为{god}，且天干已有同神透出，可将{pattern_name}写入 final_pattern。
+  candidate_only: 月令主气为{god}，可列为{pattern_name}候选，但当前未见同神透干，仅保留 candidate_pattern。
+  insufficient: 当前无法根据月令主气形成受控格局输出。

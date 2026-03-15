@@ -1,0 +1,41 @@
+month_branch_elements:
+  寅: wood
+  卯: wood
+  辰: earth
+  巳: fire
+  午: fire
+  未: earth
+  申: metal
+  酉: metal
+  戌: earth
+  亥: water
+  子: water
+  丑: earth
+
+strength_v0:
+  month_relation_impacts:
+    same_element: 6
+    produces_day_master: 5
+    produced_by_day_master: -4
+    controlled_by_day_master: -3
+    controls_day_master: -6
+  visible_support_per_stem: 2
+  hidden_support_per_stem: 1
+  visible_drain_per_stem: -2
+  thresholds:
+    weak_max: 1
+    balanced_max: 5
+  summaries:
+    weak: 偏弱
+    balanced: 中和
+    strong: 偏强
+  provisional_candidates:
+    weak:
+      favorable_relations: [same_element, produces_day_master]
+      unfavorable_relations: [controls_day_master, produced_by_day_master]
+    balanced:
+      favorable_relations: []
+      unfavorable_relations: []
+    strong:
+      favorable_relations: [produced_by_day_master, controls_day_master]
+      unfavorable_relations: [same_element, produces_day_master]
