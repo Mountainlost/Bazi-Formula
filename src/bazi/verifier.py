@@ -25,6 +25,7 @@ from .models import (
     RelationshipReadingOutput,
     RulesOutput,
     ShenShaOutput,
+    WealthReadingOutput,
 )
 from .reporter import build_report
 from .rule_data import load_enabled_evidence_ids
@@ -108,6 +109,27 @@ FORBIDDEN_CAREER_ANNUAL_FLOW_TERMS = (
     "干支骨架定事业",
     "annual_flow_v0直接定事业",
 )
+FORBIDDEN_WEALTH_ABSOLUTE_TERMS = (
+    "一定发财",
+    "一定赚大钱",
+    "必然暴富",
+    "财务自由已定",
+    "投资必赚",
+    "必然投资成功",
+    "某年一定发财",
+    "一定买房",
+)
+FORBIDDEN_WEALTH_SHEN_SHA_TERMS = (
+    "天乙贵人定财运",
+    "文昌定财运",
+    "驿马定财运",
+    "神煞定财运",
+)
+FORBIDDEN_WEALTH_ANNUAL_FLOW_TERMS = (
+    "流年骨架定财运",
+    "干支骨架定财运",
+    "annual_flow_v0直接定财运",
+)
 FORBIDDEN_RELATIONSHIP_ABSOLUTE_TERMS = (
     "一定结婚",
     "一定遇到正缘",
@@ -172,6 +194,7 @@ RULES_FIELDS = {
     "annual_flow_v0",
     "annual_reading_v0",
     "career_reading_v0",
+    "wealth_reading_v0",
     "relationship_reading_v0",
     "shen_sha_v0",
     "provisional_conclusions",
@@ -190,6 +213,7 @@ REPORT_FIELDS = {
     "annual_flow_summary",
     "annual_reading_summary",
     "career_reading_summary",
+    "wealth_reading_summary",
     "relationship_reading_summary",
     "shen_sha_summary",
     "candidate_elements_summary",
@@ -282,6 +306,13 @@ def _collect_relationship_reading_refs(
     return refs
 
 
+def _collect_wealth_reading_refs(wealth_reading: WealthReadingOutput) -> list[str]:
+    refs = list(wealth_reading.evidence_refs)
+    for note in wealth_reading.notes:
+        _append_unique(refs, note.evidence_refs)
+    return refs
+
+
 def _collect_shen_sha_refs(shen_sha: ShenShaOutput) -> list[str]:
     refs = list(shen_sha.evidence_refs)
     for hit in shen_sha.hits:
@@ -329,6 +360,7 @@ def _collect_rules_refs(rules: RulesOutput) -> list[str]:
     _append_unique(refs, _collect_annual_flow_refs(rules.annual_flow_v0))
     _append_unique(refs, _collect_annual_reading_refs(rules.annual_reading_v0))
     _append_unique(refs, _collect_career_reading_refs(rules.career_reading_v0))
+    _append_unique(refs, _collect_wealth_reading_refs(rules.wealth_reading_v0))
     _append_unique(refs, _collect_relationship_reading_refs(rules.relationship_reading_v0))
     _append_unique(refs, _collect_shen_sha_refs(rules.shen_sha_v0))
     _append_unique(refs, _collect_provisional_refs(rules.provisional_conclusions))
@@ -351,6 +383,7 @@ def _collect_report_refs(report: ReportOutput) -> list[str]:
     _append_unique(refs, _collect_annual_flow_refs(report.annual_flow_summary))
     _append_unique(refs, _collect_annual_reading_refs(report.annual_reading_summary))
     _append_unique(refs, _collect_career_reading_refs(report.career_reading_summary))
+    _append_unique(refs, _collect_wealth_reading_refs(report.wealth_reading_summary))
     _append_unique(refs, _collect_relationship_reading_refs(report.relationship_reading_summary))
     _append_unique(refs, _collect_shen_sha_refs(report.shen_sha_summary))
     _append_unique(refs, _collect_provisional_refs(report.candidate_elements_summary))
@@ -433,6 +466,12 @@ def _career_reading_texts(career_reading: CareerReadingOutput) -> list[str]:
 def _relationship_reading_texts(relationship_reading: RelationshipReadingOutput) -> list[str]:
     texts = [relationship_reading.conclusion]
     texts.extend(note.text for note in relationship_reading.notes)
+    return texts
+
+
+def _wealth_reading_texts(wealth_reading: WealthReadingOutput) -> list[str]:
+    texts = [wealth_reading.conclusion]
+    texts.extend(note.text for note in wealth_reading.notes)
     return texts
 
 
@@ -638,6 +677,16 @@ def _relationship_reading_section_valid(
     return True, f"relationship_reading_v0 {relationship_reading.status} state is structurally valid."
 
 
+def _wealth_reading_section_valid(wealth_reading: WealthReadingOutput) -> tuple[bool, str]:
+    if not wealth_reading.evidence_refs:
+        return False, "wealth_reading_v0 must include evidence_refs."
+    if not wealth_reading.notes:
+        return False, "wealth_reading_v0 must include notes."
+    if not wealth_reading.conclusion:
+        return False, "wealth_reading_v0 must include conclusion."
+    return True, f"wealth_reading_v0 {wealth_reading.status} state is structurally valid."
+
+
 def _final_report_section_valid(final_report: FinalReportOutput) -> tuple[bool, str]:
     if not final_report.evidence_refs:
         return False, "final_report_v0 must include evidence_refs."
@@ -807,6 +856,8 @@ def audit_outputs(
         and bool(rules.annual_reading_v0.notes)
         and rules.career_reading_v0.method == "career_reading_v0"
         and bool(rules.career_reading_v0.notes)
+        and rules.wealth_reading_v0.method == "wealth_reading_v0"
+        and bool(rules.wealth_reading_v0.notes)
         and rules.relationship_reading_v0.method == "relationship_reading_v0"
         and bool(rules.relationship_reading_v0.notes)
         and rules.shen_sha_v0.method == "shen_sha_v0"
@@ -871,6 +922,17 @@ def audit_outputs(
         )
     )
 
+    wealth_reading_ok, wealth_reading_message = _wealth_reading_section_valid(
+        rules.wealth_reading_v0
+    )
+    checks.append(
+        AuditCheck(
+            name="wealth_reading_structure_valid",
+            passed=wealth_reading_ok,
+            message=wealth_reading_message,
+        )
+    )
+
     relationship_reading_ok, relationship_reading_message = _relationship_reading_section_valid(
         rules.relationship_reading_v0
     )
@@ -931,6 +993,15 @@ def audit_outputs(
     )
 
     candidate_refs_ok = _candidate_items_have_refs(rules.provisional_conclusions)
+    checks.append(
+        AuditCheck(
+            name="wealth_reading_has_evidence_refs",
+            passed=bool(rules.wealth_reading_v0.evidence_refs),
+            message="wealth_reading_v0 includes evidence_refs."
+            if rules.wealth_reading_v0.evidence_refs
+            else "wealth_reading_v0 is missing evidence_refs.",
+        )
+    )
     checks.append(
         AuditCheck(
             name="candidate_elements_have_evidence_refs",
@@ -1072,6 +1143,73 @@ def audit_outputs(
             message="career_reading_v0 remains a controlled career tendency layer without event guarantees."
             if not career_absolute_hits
             else f"career_reading_v0 absolute wording detected: {career_absolute_hits}",
+        )
+    )
+
+    wealth_absolute_hits = _contains_forbidden_terms(
+        [
+            *_wealth_reading_texts(rules.wealth_reading_v0),
+            *_wealth_reading_texts(report.wealth_reading_summary),
+            report.final_report_v0.wealth.text,
+        ],
+        FORBIDDEN_WEALTH_ABSOLUTE_TERMS,
+    )
+    checks.append(
+        AuditCheck(
+            name="wealth_reading_not_absolute_verdict",
+            passed=not wealth_absolute_hits,
+            message="wealth_reading_v0 remains a controlled wealth tendency layer without event guarantees."
+            if not wealth_absolute_hits
+            else f"wealth_reading_v0 absolute wording detected: {wealth_absolute_hits}",
+        )
+    )
+
+    wealth_candidate_final_hits = _contains_forbidden_terms(
+        [
+            *_wealth_reading_texts(rules.wealth_reading_v0),
+            *_wealth_reading_texts(report.wealth_reading_summary),
+            report.final_report_v0.wealth.text,
+        ],
+        [
+            *FORBIDDEN_FINAL_REPORT_CANDIDATE_FINAL_TERMS,
+            *FORBIDDEN_FINAL_REPORT_CLIMATE_FINAL_TERMS,
+        ],
+    )
+    checks.append(
+        AuditCheck(
+            name="wealth_reading_not_candidate_final_mixup",
+            passed=not wealth_candidate_final_hits,
+            message="wealth_reading_v0 and its report restatement keep candidate-versus-final boundaries."
+            if not wealth_candidate_final_hits
+            else f"wealth_reading_v0 candidate/final overreach detected: {wealth_candidate_final_hits}",
+        )
+    )
+
+    wealth_shen_sha_hits = _contains_forbidden_terms(
+        [report.final_report_v0.wealth.text],
+        FORBIDDEN_WEALTH_SHEN_SHA_TERMS,
+    )
+    checks.append(
+        AuditCheck(
+            name="final_report_wealth_not_shen_sha_verdict",
+            passed=not wealth_shen_sha_hits,
+            message="final_report_v0 wealth text does not turn shen sha auxiliaries into a wealth verdict."
+            if not wealth_shen_sha_hits
+            else f"final_report_v0 wealth shen sha overreach detected: {wealth_shen_sha_hits}",
+        )
+    )
+
+    wealth_annual_flow_hits = _contains_forbidden_terms(
+        [report.final_report_v0.wealth.text],
+        FORBIDDEN_WEALTH_ANNUAL_FLOW_TERMS,
+    )
+    checks.append(
+        AuditCheck(
+            name="final_report_wealth_not_annual_flow_verdict",
+            passed=not wealth_annual_flow_hits,
+            message="final_report_v0 wealth text does not turn annual flow skeleton into a wealth verdict."
+            if not wealth_annual_flow_hits
+            else f"final_report_v0 wealth annual flow overreach detected: {wealth_annual_flow_hits}",
         )
     )
 
@@ -1271,6 +1409,20 @@ def audit_outputs(
     )
 
     expected_report = build_report(chart, rules)
+    wealth_report_restates_rules_only = (
+        report.wealth_reading_summary == rules.wealth_reading_v0
+        and report.final_report_v0.wealth == expected_report.final_report_v0.wealth
+        and rules.wealth_reading_v0.conclusion in report.final_report_v0.wealth.text
+    )
+    checks.append(
+        AuditCheck(
+            name="final_report_wealth_restates_rules_only",
+            passed=wealth_report_restates_rules_only,
+            message="final_report_v0 wealth section is a controlled restatement of wealth_reading_v0."
+            if wealth_report_restates_rules_only
+            else "final_report_v0 wealth section does not stay within wealth_reading_v0.",
+        )
+    )
     report_matches_scope = report == expected_report
     checks.append(
         AuditCheck(

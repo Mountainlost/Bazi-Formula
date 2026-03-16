@@ -108,6 +108,14 @@ def load_relationship_reading_rules() -> dict[str, Any]:
 
 
 @lru_cache(maxsize=None)
+def load_wealth_reading_rules() -> dict[str, Any]:
+    data = load_yaml_mapping("wealth_reading_rules.yaml")
+    if not isinstance(data, dict):
+        raise ValueError("wealth_reading_rules.yaml must contain a mapping object.")
+    return data
+
+
+@lru_cache(maxsize=None)
 def load_final_report_rules() -> dict[str, Any]:
     data = load_yaml_mapping("final_report_rules.yaml")
     if not isinstance(data, dict):

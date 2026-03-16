@@ -17,6 +17,7 @@
     "annual_flow_v0",
     "annual_reading_v0",
     "career_reading_v0",
+    "wealth_reading_v0",
     "relationship_reading_v0",
     "shen_sha_v0",
     "provisional_conclusions",
@@ -80,6 +81,9 @@
     },
     "career_reading_v0": {
       "$ref": "#/$defs/careerReadingOutput"
+    },
+    "wealth_reading_v0": {
+      "$ref": "#/$defs/wealthReadingOutput"
     },
     "relationship_reading_v0": {
       "$ref": "#/$defs/relationshipReadingOutput"
@@ -688,6 +692,67 @@
         "growth_mode": { "$ref": "#/$defs/careerGrowthMode" },
         "future_tendency": { "$ref": "#/$defs/annualReadingSignal" },
         "resource_support": { "$ref": "#/$defs/annualReadingSignal" },
+        "conclusion": { "type": "string" },
+        "notes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/evidenceNote" }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "wealthReadingStatus": {
+      "type": "string",
+      "enum": [
+        "determined",
+        "candidate_only",
+        "insufficient_for_determination"
+      ]
+    },
+    "wealthPhase": {
+      "type": "string",
+      "enum": ["active", "steady", "cautious"]
+    },
+    "wealthMode": {
+      "type": "string",
+      "enum": ["steady_accumulation", "leverage_growth", "risk_control"]
+    },
+    "wealthRiskControl": {
+      "type": "string",
+      "enum": ["tight_control", "balanced_control", "measured_expansion"]
+    },
+    "wealthReadingOutput": {
+      "type": "object",
+      "required": [
+        "method",
+        "status",
+        "base_support",
+        "current_phase",
+        "wealth_mode",
+        "future_tendency",
+        "resource_support",
+        "risk_control",
+        "conclusion",
+        "notes",
+        "evidence_refs"
+      ],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": ["wealth_reading_v0"]
+        },
+        "status": { "$ref": "#/$defs/wealthReadingStatus" },
+        "base_support": { "$ref": "#/$defs/annualReadingSignal" },
+        "current_phase": { "$ref": "#/$defs/wealthPhase" },
+        "wealth_mode": { "$ref": "#/$defs/wealthMode" },
+        "future_tendency": { "$ref": "#/$defs/annualReadingSignal" },
+        "resource_support": { "$ref": "#/$defs/annualReadingSignal" },
+        "risk_control": { "$ref": "#/$defs/wealthRiskControl" },
         "conclusion": { "type": "string" },
         "notes": {
           "type": "array",

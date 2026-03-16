@@ -31,6 +31,7 @@ def test_final_report_v0_is_written_for_user_001(tmp_path: Path) -> None:
     assert final_report.limitations
     assert final_report.evidence_refs
     assert final_report.career.evidence_refs
+    assert final_report.wealth.evidence_refs
     assert final_report.relationship.evidence_refs
 
 
@@ -40,10 +41,13 @@ def test_final_report_v0_only_restates_existing_rules(tmp_path: Path) -> None:
     report = build_report(chart, rules)
 
     assert report.career_reading_summary == rules.career_reading_v0
+    assert report.wealth_reading_summary == rules.wealth_reading_v0
     assert report.relationship_reading_summary == rules.relationship_reading_v0
     assert rules.career_reading_v0.conclusion in report.final_report_v0.career.text
+    assert rules.wealth_reading_v0.conclusion in report.final_report_v0.wealth.text
     assert rules.relationship_reading_v0.conclusion in report.final_report_v0.relationship.text
     assert "受控版 v0" in report.final_report_v0.career.text
+    assert "受控版 v0" in report.final_report_v0.wealth.text
     assert "具体事件预测" in report.final_report_v0.career.text
     assert "受控版 v0" in report.final_report_v0.relationship.text
     assert "具体事件预测" in report.final_report_v0.relationship.text

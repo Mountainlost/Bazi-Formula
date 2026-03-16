@@ -32,6 +32,7 @@ SCHEMA_EXPECTATIONS = {
         "annual_flow_v0",
         "annual_reading_v0",
         "career_reading_v0",
+        "wealth_reading_v0",
         "relationship_reading_v0",
         "shen_sha_v0",
         "provisional_conclusions",
@@ -50,6 +51,7 @@ SCHEMA_EXPECTATIONS = {
         "annual_flow_summary",
         "annual_reading_summary",
         "career_reading_summary",
+        "wealth_reading_summary",
         "relationship_reading_summary",
         "shen_sha_summary",
         "candidate_elements_summary",
@@ -96,10 +98,13 @@ def test_report_model_round_trip() -> None:
     loaded = ReportOutput.model_validate(report.model_dump())
 
     assert loaded.career_reading_summary == rules.career_reading_v0
+    assert loaded.wealth_reading_summary == rules.wealth_reading_v0
     assert loaded.relationship_reading_summary == rules.relationship_reading_v0
     assert loaded.career_reading_summary.method == "career_reading_v0"
+    assert loaded.wealth_reading_summary.method == "wealth_reading_v0"
     assert loaded.relationship_reading_summary.method == "relationship_reading_v0"
     assert loaded.final_useful_god_summary.primary_element == "metal"
     assert loaded.final_report_v0.method == "final_report_v0"
     assert rules.career_reading_v0.conclusion in loaded.final_report_v0.career.text
+    assert rules.wealth_reading_v0.conclusion in loaded.final_report_v0.wealth.text
     assert rules.relationship_reading_v0.conclusion in loaded.final_report_v0.relationship.text

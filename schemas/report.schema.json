@@ -16,6 +16,7 @@
     "annual_flow_summary",
     "annual_reading_summary",
     "career_reading_summary",
+    "wealth_reading_summary",
     "relationship_reading_summary",
     "shen_sha_summary",
     "candidate_elements_summary",
@@ -94,6 +95,9 @@
     },
     "career_reading_summary": {
       "$ref": "rules.schema.json#/$defs/careerReadingOutput"
+    },
+    "wealth_reading_summary": {
+      "$ref": "rules.schema.json#/$defs/wealthReadingOutput"
     },
     "relationship_reading_summary": {
       "$ref": "rules.schema.json#/$defs/relationshipReadingOutput"

@@ -4,7 +4,7 @@
   "based_on_chart_version": "bazi-engine-real-calc-py310-v2",
   "status": "ok",
   "day_master": "辛",
-  "summary": "日主辛；十神已完成明透与藏干映射；基础旺衰评分 v0 结果为 weak/偏弱；月令主气格识别 v1 状态为 candidate_only/月伤官格；调候受控版 v0 状态为 candidate_only/冬季；流年骨架 v0 状态为 determined/1998-2007；神煞受控版 v0 状态为 determined/1项命中；事业专项受控版 v0 状态为 determined/cautious/leverage_support；婚恋专项受控版 v0 状态为 determined/cautious；候选用神方法为 candidate_only_v0；最终用神受控版 v0 状态为 determined。",
+  "summary": "日主辛；十神已完成明透与藏干映射；基础旺衰评分 v0 结果为 weak/偏弱；月令主气格识别 v1 状态为 candidate_only/月伤官格；调候受控版 v0 状态为 candidate_only/冬季；流年骨架 v0 状态为 determined/1998-2007；神煞受控版 v0 状态为 determined/1项命中；事业专项受控版 v0 状态为 determined/cautious/leverage_support；财运专项受控版 v0 状态为 determined/cautious/leverage_growth；婚恋专项受控版 v0 状态为 determined/cautious；候选用神方法为 candidate_only_v0；最终用神受控版 v0 状态为 determined。",
   "ten_gods": {
     "stems_visible": [
       {
@@ -790,6 +790,99 @@
       "E901",
       "E906",
       "E902"
+    ]
+  },
+  "wealth_reading_v0": {
+    "method": "wealth_reading_v0",
+    "status": "determined",
+    "base_support": "favorable",
+    "current_phase": "cautious",
+    "wealth_mode": "leverage_growth",
+    "future_tendency": "favorable",
+    "resource_support": "positive",
+    "risk_control": "balanced_control",
+    "conclusion": "命局层面对财务承载与财运推进的基础支撑较强。当前阶段更适合稳健积累，不宜急于扩张。财务模式更适合借助资源放大，可在受控前提下逐步放大。未来几年财运推进偏有利，财务机会相对较多。外部资源与助力对财务增长有一定支持。当前宜边控风险边推进，不宜走向激进。",
+    "notes": [
+      {
+        "text": "财运专项受控版 v0 只整合既有十神结构、扶抑层、未来五年财运信号与当前资源支持，不展开完整传统财运体系。",
+        "evidence_refs": [
+          "E1201",
+          "E1202"
+        ]
+      },
+      {
+        "text": "财运相关神煞命中只作辅助提示，不能单独推出财运结论。",
+        "evidence_refs": [
+          "E1205"
+        ]
+      },
+      {
+        "text": "财运未来倾向只汇总 annual_reading_v0 的既有财运与助力信号，不新增流月、流日或事件预测。",
+        "evidence_refs": [
+          "E1204",
+          "E1206"
+        ]
+      },
+      {
+        "text": "已基于财星/食伤/印比等既有结构、现有扶抑层、当前阶段、未来五年财运信号与受控辅助信息，输出财运专项结论。",
+        "evidence_refs": [
+          "E1203",
+          "E1204",
+          "E1206",
+          "E1207",
+          "E1208"
+        ]
+      }
+    ],
+    "evidence_refs": [
+      "E1201",
+      "E1202",
+      "E1203",
+      "E1204",
+      "E1205",
+      "E1206",
+      "E1207",
+      "E1208",
+      "E106",
+      "E105",
+      "E104",
+      "E201",
+      "E203",
+      "E205",
+      "E206",
+      "E107",
+      "E301",
+      "E305",
+      "E306",
+      "E308",
+      "E501",
+      "E503",
+      "E502",
+      "E507",
+      "E506",
+      "E505",
+      "E602",
+      "E603",
+      "E601",
+      "E605",
+      "E604",
+      "E701",
+      "E702",
+      "E903",
+      "E905",
+      "E908",
+      "E207",
+      "E209",
+      "E208",
+      "E904",
+      "E907",
+      "E901",
+      "E906",
+      "E902",
+      "E401",
+      "E402",
+      "E404",
+      "E405"
     ]
   },
   "relationship_reading_v0": {

@@ -22,6 +22,7 @@ from .models import (
     ShenShaOutput,
     StrengthSummary,
     TenGodsSummary,
+    WealthReadingOutput,
 )
 from .rule_data import load_final_report_rules
 
@@ -82,6 +83,13 @@ def _collect_career_reading_refs(career_reading: CareerReadingOutput) -> list[st
 def _collect_relationship_reading_refs(relationship_reading: RelationshipReadingOutput) -> list[str]:
     refs = list(relationship_reading.evidence_refs)
     for note in relationship_reading.notes:
+        _append_unique(refs, note.evidence_refs)
+    return refs
+
+
+def _collect_wealth_reading_refs(wealth_reading: WealthReadingOutput) -> list[str]:
+    refs = list(wealth_reading.evidence_refs)
+    for note in wealth_reading.notes:
         _append_unique(refs, note.evidence_refs)
     return refs
 
@@ -355,17 +363,12 @@ def _build_final_report(rules: RulesOutput) -> FinalReportOutput:
     _append_unique(career_refs, ["E802", "E803", "E804", "E810", "E811"])
 
     wealth_text = (
-        f"{section_prefixes['wealth']}{strength_rules['wealth']}"
-        f"{candidate_sentence}{final_sentence}{climate_sentence}{shen_sha_sentence}{annual_sentence}"
+        f"{section_prefixes['wealth']}{rules.wealth_reading_v0.conclusion}"
+        f"{report_rules.get('wealth_limit_note', '当前财运专项为受控版 v0，只基于既有结构化规则做判断，不展开具体金额、投资成败或事件性预测。')}"
     )
     wealth_refs = list(rules.strength.evidence_refs)
-    _append_unique(wealth_refs, _collect_candidate_refs(rules))
-    _append_unique(wealth_refs, _collect_final_refs(rules))
-    _append_unique(wealth_refs, _collect_climate_refs(rules.climate_balance_v0))
-    _append_unique(wealth_refs, _collect_shen_sha_refs(rules.shen_sha_v0))
-    _append_unique(wealth_refs, _collect_annual_flow_refs(rules.annual_flow_v0))
-    _append_unique(wealth_refs, _collect_annual_reading_refs(rules.annual_reading_v0))
-    _append_unique(wealth_refs, ["E802", "E803"])
+    _append_unique(wealth_refs, _collect_wealth_reading_refs(rules.wealth_reading_v0))
+    _append_unique(wealth_refs, ["E802", "E803", "E804", "E812", "E813"])
 
     relationship_text = (
         f"{section_prefixes['relationship']}{rules.relationship_reading_v0.conclusion}"
@@ -420,6 +423,7 @@ def build_report(chart: ChartOutput, rules: RulesOutput) -> ReportOutput:
     annual_flow_refs = _collect_annual_flow_refs(rules.annual_flow_v0)
     annual_reading_refs = _collect_annual_reading_refs(rules.annual_reading_v0)
     career_reading_refs = _collect_career_reading_refs(rules.career_reading_v0)
+    wealth_reading_refs = _collect_wealth_reading_refs(rules.wealth_reading_v0)
     relationship_reading_refs = _collect_relationship_reading_refs(rules.relationship_reading_v0)
     shen_sha_refs = _collect_shen_sha_refs(rules.shen_sha_v0)
     candidate_refs = _collect_candidate_refs(rules)
@@ -433,6 +437,7 @@ def build_report(chart: ChartOutput, rules: RulesOutput) -> ReportOutput:
     _append_unique(summary_refs, annual_flow_refs)
     _append_unique(summary_refs, annual_reading_refs)
     _append_unique(summary_refs, career_reading_refs)
+    _append_unique(summary_refs, wealth_reading_refs)
     _append_unique(summary_refs, relationship_reading_refs)
     _append_unique(summary_refs, shen_sha_refs)
     _append_unique(summary_refs, candidate_refs)
@@ -472,6 +477,7 @@ def build_report(chart: ChartOutput, rules: RulesOutput) -> ReportOutput:
         annual_flow_summary=rules.annual_flow_v0,
         annual_reading_summary=rules.annual_reading_v0,
         career_reading_summary=rules.career_reading_v0,
+        wealth_reading_summary=rules.wealth_reading_v0,
         relationship_reading_summary=rules.relationship_reading_v0,
         shen_sha_summary=rules.shen_sha_v0,
         candidate_elements_summary=rules.provisional_conclusions,

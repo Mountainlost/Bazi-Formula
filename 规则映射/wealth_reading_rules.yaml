@@ -1,0 +1,122 @@
+method: wealth_reading_v0
+
+wealth_support_gods:
+  wealth: [正财, 偏财]
+  output: [食神, 伤官]
+  resource: [正印, 偏印]
+
+related_shen_sha_keys:
+  - tianyi_guiren
+  - wenchang
+  - yima
+
+score_weights:
+  base_wealth_visible: 2
+  base_wealth_hidden: 1
+  base_output_visible: 1
+  base_output_hidden: 1
+  base_resource_visible: 1
+  base_resource_hidden: 1
+  base_day_branch_bonus: 1
+  base_supportive_alignment: 2
+  base_unfavorable_alignment_penalty: -2
+  base_pattern_bonus: 1
+  base_climate_support_bonus: 1
+  base_weak_unaligned_penalty: -2
+  resource_visible_presence: 1
+  resource_hidden_presence: 1
+  resource_wealth_visible_presence: 1
+  resource_tianyi_auxiliary: 1
+  resource_wenchang_auxiliary: 1
+  resource_yima_auxiliary: 1
+  resource_current_mentor_favorable: 2
+  resource_current_mentor_positive: 1
+  resource_current_wealth_favorable: 1
+  resource_current_wealth_positive: 1
+  resource_current_wealth_cautious: -1
+  resource_current_wealth_challenging: -2
+  future_favorable_year: 2
+  future_positive_year: 1
+  future_mixed_year: 0
+  future_cautious_year: -1
+  future_challenging_year: -2
+  future_base_support_bonus: 1
+  risk_strength_weak: 2
+  risk_strength_balanced: 1
+  risk_current_wealth_cautious: 1
+  risk_current_wealth_challenging: 2
+  risk_current_wealth_positive: -1
+  risk_current_wealth_favorable: -1
+  risk_unfavorable_alignment: 2
+  risk_resource_support_relief: -1
+  risk_future_support_relief: -1
+  risk_base_support_challenging: 2
+  risk_base_support_cautious: 1
+
+thresholds:
+  base_support_favorable_min: 11
+  base_support_positive_min: 7
+  base_support_cautious_max: 2
+  base_support_challenging_max: 0
+  resource_support_favorable_min: 5
+  resource_support_positive_min: 3
+  resource_support_cautious_max: 0
+  resource_support_challenging_max: -1
+  future_favorable_min: 5
+  future_positive_min: 2
+  future_cautious_max: 0
+  future_challenging_max: -1
+  risk_tight_control_min: 4
+  risk_measured_expansion_max: 0
+
+phase_mapping:
+  favorable: active
+  positive: active
+  mixed: steady
+  cautious: cautious
+  challenging: cautious
+
+wealth_mode_rules:
+  leverage_growth_future_signals: [positive, favorable]
+  leverage_growth_resource_signals: [positive, favorable]
+  risk_control_levels: [tight_control]
+  steady_accumulation_phases: [cautious, steady]
+
+signal_texts:
+  base_support:
+    favorable: 命局层面对财务承载与财运推进的基础支撑较强。
+    positive: 命局层面对财务承载与财运推进有一定支撑。
+    mixed: 命局层面对财务承载存在支撑，但仍有分化。
+    cautious: 命局层面的财务承载基础偏谨慎。
+    challenging: 命局层面的财务承载基础偏弱。
+  current_phase:
+    active: 当前阶段财务推进偏有利，可在控制边界内主动整理机会。
+    steady: 当前阶段更适合稳中推进，边观察边积累。
+    cautious: 当前阶段更适合稳健积累，不宜急于扩张。
+  wealth_mode:
+    steady_accumulation: 财务模式更适合稳健累积，先把节奏、结构与承载力做稳。
+    leverage_growth: 财务模式更适合借助资源放大，可在受控前提下逐步放大。
+    risk_control: 财务模式当前以控制风险为先，宜先收敛敞口再谈扩张。
+  future_tendency:
+    favorable: 未来几年财运推进偏有利，财务机会相对较多。
+    positive: 未来几年财运有改善空间，可逐步提高配置效率。
+    mixed: 未来几年财运信号有起伏，宜分阶段推进。
+    cautious: 未来几年财运仍需谨慎，宜先守住已有基础。
+    challenging: 未来几年财务波动与阻力偏多，宜把稳健放在前面。
+  resource_support:
+    favorable: 外部资源与助力对财务增长的支持度较明显。
+    positive: 外部资源与助力对财务增长有一定支持。
+    mixed: 外部资源有一定帮助，但仍需自己稳步经营。
+    cautious: 外部资源支持有限，宜以内部积累为主。
+    challenging: 外部资源支持偏弱，扩张时更需谨慎。
+  risk_control:
+    tight_control: 当前更应先控风险，再考虑逐步放大。
+    balanced_control: 当前宜边控风险边推进，不宜走向激进。
+    measured_expansion: 当前可适度放大，但仍需保留风险边界。
+
+reason_texts:
+  scope_note: 财运专项受控版 v0 只整合既有十神结构、扶抑层、未来五年财运信号与当前资源支持，不展开完整传统财运体系。
+  shen_sha_auxiliary_note: 财运相关神煞命中只作辅助提示，不能单独推出财运结论。
+  future_window_note: 财运未来倾向只汇总 annual_reading_v0 的既有财运与助力信号，不新增流月、流日或事件预测。
+  determined: 已基于财星/食伤/印比等既有结构、现有扶抑层、当前阶段、未来五年财运信号与受控辅助信息，输出财运专项结论。
+  insufficient: 现有结构不足以稳定生成财运专项判断，当前保守留空。

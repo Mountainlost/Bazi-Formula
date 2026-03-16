@@ -481,6 +481,20 @@
   source_name: project_internal_rules
   enabled: true
 
+- id: E812
+  module: report
+  rule_name: final_report_v0_wealth_from_wealth_reading
+  description: final_report_v0 wealth section must be restated from wealth_reading_v0 and must not bypass that controlled layer.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E813
+  module: report
+  rule_name: final_report_v0_wealth_no_absolute_verdict
+  description: final_report_v0 wealth section may express tendency but must not become an event guarantee.
+  source_name: project_internal_rules
+  enabled: true
+
 - id: E1101
   module: career_reading
   rule_name: career_reading_scope_limit_v0
@@ -576,5 +590,61 @@
   module: relationship_reading
   rule_name: relationship_reading_current_phase_from_annual_reading
   description: relationship_reading_v0 may anchor the current phase to the existing annual_reading_v0 relationship signal instead of creating a separate timing system.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1201
+  module: wealth_reading
+  rule_name: wealth_reading_scope_limit_v0
+  description: wealth_reading_v0 is a controlled wealth layer built from existing structures and does not implement the full traditional wealth system.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1202
+  module: wealth_reading
+  rule_name: wealth_reading_uses_existing_wealth_god_structure
+  description: wealth_reading_v0 may use a small controlled set of wealth-related ten-god categories such as wealth, output, and resource as structural signals.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1203
+  module: wealth_reading
+  rule_name: wealth_reading_uses_existing_support_layers
+  description: wealth_reading_v0 may combine existing ten-god structure, final useful god, pattern, climate, annual reading, and controlled shen sha signals without overriding those layers.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1204
+  module: wealth_reading
+  rule_name: wealth_reading_uses_current_phase_and_future_window
+  description: wealth_reading_v0 may summarize the current phase and near-future tendency only from the existing annual reading window and current resource context.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1205
+  module: wealth_reading
+  rule_name: wealth_reading_shen_sha_auxiliary_only
+  description: Any shen sha signal used by wealth_reading_v0 must remain auxiliary and cannot independently decide the conclusion.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1206
+  module: wealth_reading
+  rule_name: wealth_reading_not_event_prediction
+  description: wealth_reading_v0 may state controlled tendencies such as accumulation or caution but must not predict a guaranteed wealth event.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1207
+  module: wealth_reading
+  rule_name: wealth_reading_mode_from_controlled_signals
+  description: wealth_reading_v0 wealth_mode must be derived only from existing controlled signals such as current phase, future tendency, resource support, and risk control.
+  source_name: project_internal_rules
+  enabled: true
+
+- id: E1208
+  module: wealth_reading
+  rule_name: wealth_reading_risk_control_from_controlled_signals
+  description: wealth_reading_v0 risk_control must be derived only from existing controlled signals and must not become an investment prediction.
   source_name: project_internal_rules
   enabled: true

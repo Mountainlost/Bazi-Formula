@@ -35,6 +35,18 @@ CareerReadingStatus = Literal[
 ]
 CareerPhase = Literal["active", "steady", "cautious"]
 CareerGrowthMode = Literal["steady_build", "leverage_support", "active_breakthrough"]
+WealthReadingStatus = Literal[
+    "determined",
+    "candidate_only",
+    "insufficient_for_determination",
+]
+WealthPhase = Literal["active", "steady", "cautious"]
+WealthMode = Literal["steady_accumulation", "leverage_growth", "risk_control"]
+WealthRiskControl = Literal[
+    "tight_control",
+    "balanced_control",
+    "measured_expansion",
+]
 RelationshipReadingStatus = Literal[
     "determined",
     "candidate_only",
@@ -344,6 +356,20 @@ class CareerReadingOutput(StrictModel):
     evidence_refs: list[str] = Field(min_length=1)
 
 
+class WealthReadingOutput(StrictModel):
+    method: Literal["wealth_reading_v0"] = "wealth_reading_v0"
+    status: WealthReadingStatus
+    base_support: AnnualReadingSignal
+    current_phase: WealthPhase
+    wealth_mode: WealthMode
+    future_tendency: AnnualReadingSignal
+    resource_support: AnnualReadingSignal
+    risk_control: WealthRiskControl
+    conclusion: str
+    notes: list[EvidenceNote] = Field(min_length=1)
+    evidence_refs: list[str] = Field(min_length=1)
+
+
 class RelationshipReadingOutput(StrictModel):
     method: Literal["relationship_reading_v0"] = "relationship_reading_v0"
     status: RelationshipReadingStatus
@@ -421,6 +447,7 @@ class RulesOutput(StrictModel):
     annual_flow_v0: AnnualFlowOutput
     annual_reading_v0: AnnualReadingOutput
     career_reading_v0: CareerReadingOutput
+    wealth_reading_v0: WealthReadingOutput
     relationship_reading_v0: RelationshipReadingOutput
     shen_sha_v0: ShenShaOutput
     provisional_conclusions: ProvisionalConclusions
@@ -491,6 +518,7 @@ class ReportOutput(StrictModel):
     annual_flow_summary: AnnualFlowOutput
     annual_reading_summary: AnnualReadingOutput
     career_reading_summary: CareerReadingOutput
+    wealth_reading_summary: WealthReadingOutput
     relationship_reading_summary: RelationshipReadingOutput
     shen_sha_summary: ShenShaOutput
     candidate_elements_summary: ProvisionalConclusions

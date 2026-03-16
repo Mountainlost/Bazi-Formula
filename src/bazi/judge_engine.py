@@ -27,6 +27,7 @@ from .models import (
     ShenShaOutput,
     StrengthOutput,
     TenGodsOutput,
+    WealthReadingOutput,
 )
 from .rule_data import (
     load_annual_flow_rules,
@@ -38,6 +39,7 @@ from .rule_data import (
     load_relationship_reading_rules,
     load_shen_sha_rules,
     load_strength_rules,
+    load_wealth_reading_rules,
 )
 from .strength import judge_strength
 from .ten_gods import calculate_ten_gods, get_stem_element, relation_to_element
@@ -1411,6 +1413,342 @@ def _build_career_reading(
     )
 
 
+def _wealth_mode(
+    current_phase: str,
+    future_tendency: str,
+    resource_support: str,
+    risk_control: str,
+    rules: dict[str, object],
+) -> str:
+    mode_rules = rules["wealth_mode_rules"]
+    leverage_growth_future_signals = set(mode_rules["leverage_growth_future_signals"])
+    leverage_growth_resource_signals = set(
+        mode_rules["leverage_growth_resource_signals"]
+    )
+    risk_control_levels = set(mode_rules["risk_control_levels"])
+    steady_accumulation_phases = set(mode_rules["steady_accumulation_phases"])
+
+    if (
+        future_tendency in leverage_growth_future_signals
+        and resource_support in leverage_growth_resource_signals
+        and risk_control not in risk_control_levels
+    ):
+        return "leverage_growth"
+    if current_phase in steady_accumulation_phases:
+        return "steady_accumulation"
+    if risk_control in risk_control_levels:
+        return "risk_control"
+    return "steady_accumulation"
+
+
+def _build_wealth_conclusion(
+    signal_texts: dict[str, dict[str, str]],
+    *,
+    base_support: str,
+    current_phase: str,
+    wealth_mode: str,
+    future_tendency: str,
+    resource_support: str,
+    risk_control: str,
+) -> str:
+    return "".join(
+        [
+            signal_texts["base_support"][base_support],
+            signal_texts["current_phase"][current_phase],
+            signal_texts["wealth_mode"][wealth_mode],
+            signal_texts["future_tendency"][future_tendency],
+            signal_texts["resource_support"][resource_support],
+            signal_texts["risk_control"][risk_control],
+        ]
+    )
+
+
+def _build_wealth_reading(
+    ten_gods: TenGodsOutput,
+    strength: StrengthOutput,
+    provisional_conclusions: ProvisionalConclusions,
+    final_useful_god_v0: FinalUsefulGodOutput,
+    pattern_system_v1: PatternSystemOutput,
+    climate_balance_v0: ClimateBalanceOutput,
+    annual_reading_v0: AnnualReadingOutput,
+    shen_sha_v0: ShenShaOutput,
+) -> WealthReadingOutput:
+    rules = load_wealth_reading_rules()
+    notes = [
+        EvidenceNote(
+            text=rules["reason_texts"]["scope_note"],
+            evidence_refs=["E1201", "E1202"],
+        ),
+        EvidenceNote(
+            text=rules["reason_texts"]["shen_sha_auxiliary_note"],
+            evidence_refs=["E1205"],
+        ),
+        EvidenceNote(
+            text=rules["reason_texts"]["future_window_note"],
+            evidence_refs=["E1204", "E1206"],
+        ),
+    ]
+
+    if annual_reading_v0.status != "determined" or not annual_reading_v0.entries:
+        notes.append(
+            EvidenceNote(
+                text=rules["reason_texts"]["insufficient"],
+                evidence_refs=["E107"],
+            )
+        )
+        evidence_refs: list[str] = []
+        for note in notes:
+            _append_unique(evidence_refs, note.evidence_refs)
+        return WealthReadingOutput(
+            method=rules["method"],
+            status="insufficient_for_determination",
+            base_support="cautious",
+            current_phase="cautious",
+            wealth_mode="steady_accumulation",
+            future_tendency="cautious",
+            resource_support="cautious",
+            risk_control="tight_control",
+            conclusion="不足以判断。",
+            notes=notes,
+            evidence_refs=evidence_refs,
+        )
+
+    try:
+        category_gods = {
+            key: set(value) for key, value in rules["wealth_support_gods"].items()
+        }
+        (
+            snapshot,
+            wealth_elements,
+            day_branch_categories,
+            wealth_star_refs,
+        ) = _career_god_snapshot(ten_gods, category_gods)
+        weights = {key: int(value) for key, value in rules["score_weights"].items()}
+        thresholds = {key: int(value) for key, value in rules["thresholds"].items()}
+        signal_texts = rules["signal_texts"]
+        phase_mapping = rules["phase_mapping"]
+        related_shen_sha_keys = set(rules["related_shen_sha_keys"])
+
+        supportive_elements = {
+            item.element for item in provisional_conclusions.favorable_elements_candidates
+        }
+        if final_useful_god_v0.primary_element is not None:
+            supportive_elements.add(final_useful_god_v0.primary_element)
+        supportive_elements.update(final_useful_god_v0.secondary_elements)
+        unfavorable_elements = {
+            item.element for item in provisional_conclusions.unfavorable_elements_candidates
+        }
+
+        base_support_score = (
+            len(snapshot["wealth"]["visible"]) * weights["base_wealth_visible"]
+            + len(snapshot["wealth"]["hidden"]) * weights["base_wealth_hidden"]
+            + len(snapshot["output"]["visible"]) * weights["base_output_visible"]
+            + len(snapshot["output"]["hidden"]) * weights["base_output_hidden"]
+            + len(snapshot["resource"]["visible"]) * weights["base_resource_visible"]
+            + len(snapshot["resource"]["hidden"]) * weights["base_resource_hidden"]
+        )
+        if day_branch_categories.intersection({"wealth", "output"}):
+            base_support_score += weights["base_day_branch_bonus"]
+        if wealth_elements.intersection(supportive_elements):
+            base_support_score += weights["base_supportive_alignment"]
+        if wealth_elements.intersection(unfavorable_elements):
+            base_support_score += weights["base_unfavorable_alignment_penalty"]
+        elif strength.label == "weak" and not wealth_elements.intersection(supportive_elements):
+            base_support_score += weights["base_weak_unaligned_penalty"]
+
+        pattern_god = None
+        if pattern_system_v1.final_pattern is not None:
+            pattern_god = pattern_system_v1.final_pattern.source_god
+        elif pattern_system_v1.candidate_pattern is not None:
+            pattern_god = pattern_system_v1.candidate_pattern.source_god
+        if pattern_god is not None and any(
+            pattern_god in gods for gods in category_gods.values()
+        ):
+            base_support_score += weights["base_pattern_bonus"]
+
+        climate_elements = {
+            item.element for item in climate_balance_v0.candidate_adjustments
+        }
+        if climate_elements.intersection(supportive_elements):
+            base_support_score += weights["base_climate_support_bonus"]
+
+        base_support = _signal_from_score(
+            base_support_score,
+            thresholds["base_support_favorable_min"],
+            thresholds["base_support_positive_min"],
+            thresholds["base_support_cautious_max"],
+            thresholds["base_support_challenging_max"],
+        )
+
+        current_entry = annual_reading_v0.entries[0]
+        current_phase = phase_mapping[current_entry.wealth_signal]
+
+        resource_support_score = 0
+        if snapshot["resource"]["visible"]:
+            resource_support_score += weights["resource_visible_presence"]
+        if snapshot["resource"]["hidden"]:
+            resource_support_score += weights["resource_hidden_presence"]
+        if snapshot["wealth"]["visible"]:
+            resource_support_score += weights["resource_wealth_visible_presence"]
+        if current_entry.mentor_signal == "favorable":
+            resource_support_score += weights["resource_current_mentor_favorable"]
+        elif current_entry.mentor_signal == "positive":
+            resource_support_score += weights["resource_current_mentor_positive"]
+        if current_entry.wealth_signal == "favorable":
+            resource_support_score += weights["resource_current_wealth_favorable"]
+        elif current_entry.wealth_signal == "positive":
+            resource_support_score += weights["resource_current_wealth_positive"]
+        elif current_entry.wealth_signal == "cautious":
+            resource_support_score += weights["resource_current_wealth_cautious"]
+        elif current_entry.wealth_signal == "challenging":
+            resource_support_score += weights["resource_current_wealth_challenging"]
+
+        shen_sha_hit_keys = {item.key for item in shen_sha_v0.hits}
+        if "tianyi_guiren" in shen_sha_hit_keys.intersection(related_shen_sha_keys):
+            resource_support_score += weights["resource_tianyi_auxiliary"]
+        if "wenchang" in shen_sha_hit_keys.intersection(related_shen_sha_keys):
+            resource_support_score += weights["resource_wenchang_auxiliary"]
+        if "yima" in shen_sha_hit_keys.intersection(related_shen_sha_keys):
+            resource_support_score += weights["resource_yima_auxiliary"]
+
+        resource_support = _signal_from_score(
+            resource_support_score,
+            thresholds["resource_support_favorable_min"],
+            thresholds["resource_support_positive_min"],
+            thresholds["resource_support_cautious_max"],
+            thresholds["resource_support_challenging_max"],
+        )
+
+        wealth_signals = [item.wealth_signal for item in annual_reading_v0.entries]
+        future_score = sum(weights[f"future_{signal}_year"] for signal in wealth_signals)
+        if base_support in {"favorable", "positive"}:
+            future_score += weights["future_base_support_bonus"]
+        future_tendency = _signal_from_score(
+            future_score,
+            thresholds["future_favorable_min"],
+            thresholds["future_positive_min"],
+            thresholds["future_cautious_max"],
+            thresholds["future_challenging_max"],
+        )
+
+        risk_control_score = 0
+        if strength.label == "weak":
+            risk_control_score += weights["risk_strength_weak"]
+        elif strength.label == "balanced":
+            risk_control_score += weights["risk_strength_balanced"]
+        if current_entry.wealth_signal == "cautious":
+            risk_control_score += weights["risk_current_wealth_cautious"]
+        elif current_entry.wealth_signal == "challenging":
+            risk_control_score += weights["risk_current_wealth_challenging"]
+        elif current_entry.wealth_signal == "positive":
+            risk_control_score += weights["risk_current_wealth_positive"]
+        elif current_entry.wealth_signal == "favorable":
+            risk_control_score += weights["risk_current_wealth_favorable"]
+        if wealth_elements.intersection(unfavorable_elements):
+            risk_control_score += weights["risk_unfavorable_alignment"]
+        if resource_support in {"positive", "favorable"}:
+            risk_control_score += weights["risk_resource_support_relief"]
+        if future_tendency in {"positive", "favorable"}:
+            risk_control_score += weights["risk_future_support_relief"]
+        if base_support == "challenging":
+            risk_control_score += weights["risk_base_support_challenging"]
+        elif base_support == "cautious":
+            risk_control_score += weights["risk_base_support_cautious"]
+
+        if risk_control_score >= thresholds["risk_tight_control_min"]:
+            risk_control = "tight_control"
+        elif risk_control_score <= thresholds["risk_measured_expansion_max"]:
+            risk_control = "measured_expansion"
+        else:
+            risk_control = "balanced_control"
+
+        wealth_mode = _wealth_mode(
+            current_phase,
+            future_tendency,
+            resource_support,
+            risk_control,
+            rules,
+        )
+
+        conclusion = _build_wealth_conclusion(
+            signal_texts,
+            base_support=base_support,
+            current_phase=current_phase,
+            wealth_mode=wealth_mode,
+            future_tendency=future_tendency,
+            resource_support=resource_support,
+            risk_control=risk_control,
+        )
+
+        notes.append(
+            EvidenceNote(
+                text=rules["reason_texts"]["determined"],
+                evidence_refs=["E1203", "E1204", "E1206", "E1207", "E1208"],
+            )
+        )
+
+        evidence_refs: list[str] = [
+            "E1201",
+            "E1202",
+            "E1203",
+            "E1204",
+            "E1205",
+            "E1206",
+            "E1207",
+            "E1208",
+        ]
+        _append_unique(evidence_refs, wealth_star_refs)
+        _append_unique(evidence_refs, _collect_provisional_refs(provisional_conclusions))
+        _append_unique(evidence_refs, _collect_final_refs(final_useful_god_v0))
+        _append_unique(evidence_refs, _collect_climate_refs(climate_balance_v0))
+        _append_unique(evidence_refs, _collect_shen_sha_refs(shen_sha_v0))
+        _append_unique(evidence_refs, annual_reading_v0.evidence_refs)
+        if pattern_system_v1.candidate_pattern is not None:
+            _append_unique(evidence_refs, pattern_system_v1.candidate_pattern.evidence_refs)
+        if pattern_system_v1.final_pattern is not None:
+            _append_unique(evidence_refs, pattern_system_v1.final_pattern.evidence_refs)
+        _append_unique(evidence_refs, pattern_system_v1.evidence_refs)
+        for note in notes:
+            _append_unique(evidence_refs, note.evidence_refs)
+    except (KeyError, TypeError, ValueError):
+        notes.append(
+            EvidenceNote(
+                text=rules["reason_texts"]["insufficient"],
+                evidence_refs=["E107"],
+            )
+        )
+        evidence_refs = []
+        for note in notes:
+            _append_unique(evidence_refs, note.evidence_refs)
+        return WealthReadingOutput(
+            method=rules["method"],
+            status="insufficient_for_determination",
+            base_support="cautious",
+            current_phase="cautious",
+            wealth_mode="steady_accumulation",
+            future_tendency="cautious",
+            resource_support="cautious",
+            risk_control="tight_control",
+            conclusion="不足以判断。",
+            notes=notes,
+            evidence_refs=evidence_refs,
+        )
+
+    return WealthReadingOutput(
+        method=rules["method"],
+        status="determined",
+        base_support=base_support,
+        current_phase=current_phase,
+        wealth_mode=wealth_mode,
+        future_tendency=future_tendency,
+        resource_support=resource_support,
+        risk_control=risk_control,
+        conclusion=conclusion,
+        notes=notes,
+        evidence_refs=evidence_refs,
+    )
+
+
 def _relationship_star_snapshot(
     ten_gods: TenGodsOutput,
     relationship_gods: set[str],
@@ -1852,6 +2190,16 @@ def build_rules_output(chart: ChartOutput) -> RulesOutput:
         annual_reading_v0,
         shen_sha_v0,
     )
+    wealth_reading_v0 = _build_wealth_reading(
+        ten_gods,
+        strength,
+        provisional_conclusions,
+        final_useful_god_v0,
+        pattern_system_v1,
+        climate_balance_v0,
+        annual_reading_v0,
+        shen_sha_v0,
+    )
     relationship_reading_v0 = _build_relationship_reading(
         chart,
         ten_gods,
@@ -1884,6 +2232,7 @@ def build_rules_output(chart: ChartOutput) -> RulesOutput:
         f"流年骨架 v0 状态为 {annual_flow_v0.status}/{annual_window}；"
         f"神煞受控版 v0 状态为 {shen_sha_v0.status}/{shen_sha_hit_count}项命中；"
         f"事业专项受控版 v0 状态为 {career_reading_v0.status}/{career_reading_v0.current_phase}/{career_reading_v0.growth_mode}；"
+        f"财运专项受控版 v0 状态为 {wealth_reading_v0.status}/{wealth_reading_v0.current_phase}/{wealth_reading_v0.wealth_mode}；"
         f"婚恋专项受控版 v0 状态为 {relationship_reading_v0.status}/{relationship_reading_v0.current_phase}；"
         f"候选用神方法为 {provisional_conclusions.method}；"
         f"最终用神受控版 v0 状态为 {final_useful_god_v0.status}。"
@@ -1903,6 +2252,7 @@ def build_rules_output(chart: ChartOutput) -> RulesOutput:
         annual_flow_v0=annual_flow_v0,
         annual_reading_v0=annual_reading_v0,
         career_reading_v0=career_reading_v0,
+        wealth_reading_v0=wealth_reading_v0,
         relationship_reading_v0=relationship_reading_v0,
         shen_sha_v0=shen_sha_v0,
         provisional_conclusions=provisional_conclusions,

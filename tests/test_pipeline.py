@@ -99,15 +99,19 @@ def test_full_pipeline_generates_consistent_outputs(tmp_path: Path) -> None:
 
     assert report["annual_reading_summary"] == rules["annual_reading_v0"]
     assert report["career_reading_summary"] == rules["career_reading_v0"]
+    assert report["wealth_reading_summary"] == rules["wealth_reading_v0"]
     assert report["relationship_reading_summary"] == rules["relationship_reading_v0"]
     assert report["shen_sha_summary"] == rules["shen_sha_v0"]
     assert report["final_report_v0"]["career"]["text"].startswith("事业部分当前只基于既有规则做受控整合。")
+    assert report["final_report_v0"]["wealth"]["text"].startswith("财运部分当前只基于既有规则做受控整合。")
     assert report["final_report_v0"]["relationship"]["text"].startswith("婚恋部分当前只基于既有规则做受控整合。")
     assert rules["career_reading_v0"]["conclusion"] in report["final_report_v0"]["career"]["text"]
+    assert rules["wealth_reading_v0"]["conclusion"] in report["final_report_v0"]["wealth"]["text"]
     assert rules["relationship_reading_v0"]["conclusion"] in report["final_report_v0"]["relationship"]["text"]
     assert "具体事件预测" in report["final_report_v0"]["career"]["text"]
     assert "具体事件预测" in report["final_report_v0"]["relationship"]["text"]
     assert [item["year"] for item in report["final_report_v0"]["future_five_years"]["entries"]] == [2026, 2027, 2028, 2029, 2030]
     assert report["final_report_v0"]["career"]["text"] in markdown_text
+    assert report["final_report_v0"]["wealth"]["text"] in markdown_text
     assert report["final_report_v0"]["relationship"]["text"] in markdown_text
     assert audit["passed"] is True

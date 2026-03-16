@@ -63,6 +63,22 @@ def test_rules_and_golden_sample_match(tmp_path: Path) -> None:
     assert career["conclusion"]
     assert career["evidence_refs"]
 
+    wealth = rules["wealth_reading_v0"]
+    assert wealth["method"] == "wealth_reading_v0"
+    assert wealth["status"] == "determined"
+    assert wealth["base_support"] in {"positive", "favorable"}
+    assert wealth["current_phase"] == "cautious"
+    assert wealth["wealth_mode"] in {"steady_accumulation", "leverage_growth", "risk_control"}
+    assert wealth["future_tendency"] in {"positive", "favorable"}
+    assert wealth["resource_support"] in {"mixed", "positive", "favorable"}
+    assert wealth["risk_control"] in {
+        "tight_control",
+        "balanced_control",
+        "measured_expansion",
+    }
+    assert wealth["conclusion"]
+    assert wealth["evidence_refs"]
+
     relationship = rules["relationship_reading_v0"]
     assert relationship["method"] == "relationship_reading_v0"
     assert relationship["status"] == "determined"
