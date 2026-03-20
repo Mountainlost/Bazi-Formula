@@ -1,0 +1,207 @@
+{
+  "engine_version": "bazi-engine-real-calc-py310-v2",
+  "school": "bazi_ziping_v1",
+  "calc_basis": {
+    "calendar_type": "solar",
+    "timezone": "Asia/Shanghai",
+    "true_solar_time": false,
+    "real_calendar": true,
+    "month_rule": "jieqi",
+    "day_rule": "sect_2",
+    "library_name": "lunar_python"
+  },
+  "input_snapshot": {
+    "birth_date": "1998-10-09",
+    "birth_time": "00:00",
+    "birth_place": "安徽淮南",
+    "gender": "female",
+    "calendar_type": "solar",
+    "timezone": "Asia/Shanghai",
+    "true_solar_time": false,
+    "school": "bazi_ziping_v1"
+  },
+  "solar_datetime": "1998-10-09T00:00:00+08:00",
+  "pillars": {
+    "year": {
+      "stem": "戊",
+      "branch": "寅",
+      "ganzhi": "戊寅"
+    },
+    "month": {
+      "stem": "壬",
+      "branch": "戌",
+      "ganzhi": "壬戌"
+    },
+    "day": {
+      "stem": "己",
+      "branch": "丑",
+      "ganzhi": "己丑"
+    },
+    "hour": {
+      "stem": "甲",
+      "branch": "子",
+      "ganzhi": "甲子"
+    }
+  },
+  "day_master": "己",
+  "luck_cycle": {
+    "basis": {
+      "direction_rule": "year_stem_polarity_with_gender: yang_male_or_yin_female_forward_else_backward",
+      "start_age_rule": "sect_1_conversion: 3_days_1_year, 1_day_4_months, 1_shichen_10_days",
+      "jieqi_anchor_rule": "forward_next_jie_backward_previous_jie",
+      "library_name": "lunar_python",
+      "enabled": true
+    },
+    "direction": "backward",
+    "start_age": 0.1,
+    "start_datetime": "1998-10-29T00:00:00+08:00",
+    "cycles": [
+      {
+        "index": 1,
+        "ganzhi": "辛酉",
+        "stem": "辛",
+        "branch": "酉",
+        "start_age": 0.1,
+        "end_age": 10.1,
+        "start_year": 1998,
+        "end_year": 2008,
+        "evidence_refs": [
+          "E207",
+          "E209"
+        ]
+      },
+      {
+        "index": 2,
+        "ganzhi": "庚申",
+        "stem": "庚",
+        "branch": "申",
+        "start_age": 10.1,
+        "end_age": 20.1,
+        "start_year": 2008,
+        "end_year": 2018,
+        "evidence_refs": [
+          "E207",
+          "E209"
+        ]
+      },
+      {
+        "index": 3,
+        "ganzhi": "己未",
+        "stem": "己",
+        "branch": "未",
+        "start_age": 20.1,
+        "end_age": 30.1,
+        "start_year": 2018,
+        "end_year": 2028,
+        "evidence_refs": [
+          "E207",
+          "E209"
+        ]
+      },
+      {
+        "index": 4,
+        "ganzhi": "戊午",
+        "stem": "戊",
+        "branch": "午",
+        "start_age": 30.1,
+        "end_age": 40.1,
+        "start_year": 2028,
+        "end_year": 2038,
+        "evidence_refs": [
+          "E207",
+          "E209"
+        ]
+      },
+      {
+        "index": 5,
+        "ganzhi": "丁巳",
+        "stem": "丁",
+        "branch": "巳",
+        "start_age": 40.1,
+        "end_age": 50.1,
+        "start_year": 2038,
+        "end_year": 2048,
+        "evidence_refs": [
+          "E207",
+          "E209"
+        ]
+      },
+      {
+        "index": 6,
+        "ganzhi": "丙辰",
+        "stem": "丙",
+        "branch": "辰",
+        "start_age": 50.1,
+        "end_age": 60.1,
+        "start_year": 2048,
+        "end_year": 2058,
+        "evidence_refs": [
+          "E207",
+          "E209"
+        ]
+      },
+      {
+        "index": 7,
+        "ganzhi": "乙卯",
+        "stem": "乙",
+        "branch": "卯",
+        "start_age": 60.1,
+        "end_age": 70.1,
+        "start_year": 2058,
+        "end_year": 2068,
+        "evidence_refs": [
+          "E207",
+          "E209"
+        ]
+      },
+      {
+        "index": 8,
+        "ganzhi": "甲寅",
+        "stem": "甲",
+        "branch": "寅",
+        "start_age": 70.1,
+        "end_age": 80.1,
+        "start_year": 2068,
+        "end_year": 2078,
+        "evidence_refs": [
+          "E207",
+          "E209"
+        ]
+      },
+      {
+        "index": 9,
+        "ganzhi": "癸丑",
+        "stem": "癸",
+        "branch": "丑",
+        "start_age": 80.1,
+        "end_age": 90.1,
+        "start_year": 2078,
+        "end_year": 2088,
+        "evidence_refs": [
+          "E207",
+          "E209"
+        ]
+      },
+      {
+        "index": 10,
+        "ganzhi": "壬子",
+        "stem": "壬",
+        "branch": "子",
+        "start_age": 90.1,
+        "end_age": 100.1,
+        "start_year": 2088,
+        "end_year": 2098,
+        "evidence_refs": [
+          "E207",
+          "E209"
+        ]
+      }
+    ],
+    "evidence_refs": [
+      "E207",
+      "E208",
+      "E209"
+    ]
+  },
+  "status": "ok"
+}
