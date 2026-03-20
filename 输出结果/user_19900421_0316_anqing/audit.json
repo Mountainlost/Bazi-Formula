@@ -1,0 +1,244 @@
+{
+  "audit_version": "bazi-audit-evidence-v5",
+  "engine_version": "bazi-engine-real-calc-py310-v2",
+  "rules_version": "bazi-rules-shen-sha-v5",
+  "report_version": "bazi-report-structured-v5",
+  "passed": true,
+  "checks": [
+    {
+      "name": "files_exist",
+      "passed": true,
+      "message": "chart.json, rules.json, and report.json all exist."
+    },
+    {
+      "name": "no_obvious_extra_fields",
+      "passed": true,
+      "message": "No obvious out-of-scope fields were detected."
+    },
+    {
+      "name": "schema_validation",
+      "passed": true,
+      "message": "chart.json, rules.json, and report.json passed model validation."
+    },
+    {
+      "name": "version_alignment",
+      "passed": true,
+      "message": "engine_version, rules_version, and based_on_chart_version are aligned."
+    },
+    {
+      "name": "rules_required_sections_present",
+      "passed": true,
+      "message": "rules.json contains all required rule sections."
+    },
+    {
+      "name": "pattern_system_structure_valid",
+      "passed": true,
+      "message": "pattern_system_v1 candidate_only state is structurally valid."
+    },
+    {
+      "name": "climate_balance_structure_valid",
+      "passed": true,
+      "message": "climate_balance_v0 candidate_only state is structurally valid."
+    },
+    {
+      "name": "annual_flow_structure_valid",
+      "passed": true,
+      "message": "annual_flow_v0 determined state is structurally valid."
+    },
+    {
+      "name": "annual_reading_structure_valid",
+      "passed": true,
+      "message": "annual_reading_v0 determined state is structurally valid."
+    },
+    {
+      "name": "career_reading_structure_valid",
+      "passed": true,
+      "message": "career_reading_v0 determined state is structurally valid."
+    },
+    {
+      "name": "wealth_reading_structure_valid",
+      "passed": true,
+      "message": "wealth_reading_v0 determined state is structurally valid."
+    },
+    {
+      "name": "relationship_reading_structure_valid",
+      "passed": true,
+      "message": "relationship_reading_v0 determined state is structurally valid."
+    },
+    {
+      "name": "shen_sha_structure_valid",
+      "passed": true,
+      "message": "shen_sha_v0 determined state is structurally valid."
+    },
+    {
+      "name": "final_useful_god_structure_valid",
+      "passed": true,
+      "message": "final_useful_god_v0 determined state is structurally valid."
+    },
+    {
+      "name": "final_report_structure_valid",
+      "passed": true,
+      "message": "final_report_v0 structure is valid."
+    },
+    {
+      "name": "evidence_refs_registered",
+      "passed": true,
+      "message": "All evidence_refs are registered in evidence_registry.yaml."
+    },
+    {
+      "name": "wealth_reading_has_evidence_refs",
+      "passed": true,
+      "message": "wealth_reading_v0 includes evidence_refs."
+    },
+    {
+      "name": "candidate_elements_have_evidence_refs",
+      "passed": true,
+      "message": "Every candidate element includes evidence_refs."
+    },
+    {
+      "name": "candidate_elements_not_definitive",
+      "passed": true,
+      "message": "Candidate output remains provisional."
+    },
+    {
+      "name": "climate_balance_not_final_useful_god",
+      "passed": true,
+      "message": "Climate balance output remains independent from final useful god."
+    },
+    {
+      "name": "final_report_candidate_not_finalized",
+      "passed": true,
+      "message": "final_report_v0 preserves candidate-versus-final boundaries."
+    },
+    {
+      "name": "final_report_climate_not_final_useful_god",
+      "passed": true,
+      "message": "final_report_v0 does not treat climate candidates as final useful god."
+    },
+    {
+      "name": "annual_flow_not_fortune_verdict",
+      "passed": true,
+      "message": "Annual flow output remains a structured ganzhi skeleton without verdict language."
+    },
+    {
+      "name": "annual_reading_not_absolute_verdict",
+      "passed": true,
+      "message": "annual_reading_v0 remains a controlled tendency layer without absolute event claims."
+    },
+    {
+      "name": "annual_reading_not_neutral_fallback",
+      "passed": true,
+      "message": "annual_reading_v0 avoids vague neutral fallback wording when stronger evidence exists."
+    },
+    {
+      "name": "career_reading_not_absolute_verdict",
+      "passed": true,
+      "message": "career_reading_v0 remains a controlled career tendency layer without event guarantees."
+    },
+    {
+      "name": "wealth_reading_not_absolute_verdict",
+      "passed": true,
+      "message": "wealth_reading_v0 remains a controlled wealth tendency layer without event guarantees."
+    },
+    {
+      "name": "wealth_reading_not_candidate_final_mixup",
+      "passed": true,
+      "message": "wealth_reading_v0 and its report restatement keep candidate-versus-final boundaries."
+    },
+    {
+      "name": "final_report_wealth_not_shen_sha_verdict",
+      "passed": true,
+      "message": "final_report_v0 wealth text does not turn shen sha auxiliaries into a wealth verdict."
+    },
+    {
+      "name": "final_report_wealth_not_annual_flow_verdict",
+      "passed": true,
+      "message": "final_report_v0 wealth text does not turn annual flow skeleton into a wealth verdict."
+    },
+    {
+      "name": "final_report_career_not_shen_sha_verdict",
+      "passed": true,
+      "message": "final_report_v0 career text does not turn shen sha auxiliaries into a career verdict."
+    },
+    {
+      "name": "final_report_career_not_annual_flow_verdict",
+      "passed": true,
+      "message": "final_report_v0 career text does not turn annual flow skeleton into a career verdict."
+    },
+    {
+      "name": "relationship_reading_not_absolute_verdict",
+      "passed": true,
+      "message": "relationship_reading_v0 remains a controlled relationship tendency layer without event guarantees."
+    },
+    {
+      "name": "final_report_relationship_not_shen_sha_verdict",
+      "passed": true,
+      "message": "final_report_v0 relationship text does not turn shen sha auxiliaries into a relationship verdict."
+    },
+    {
+      "name": "final_report_relationship_not_annual_flow_verdict",
+      "passed": true,
+      "message": "final_report_v0 relationship text does not turn annual flow skeleton into a relationship verdict."
+    },
+    {
+      "name": "final_report_annual_flow_not_fortune_verdict",
+      "passed": true,
+      "message": "final_report_v0 does not turn annual flow skeleton into a verdict layer."
+    },
+    {
+      "name": "final_report_future_five_years_not_absolute_verdict",
+      "passed": true,
+      "message": "final_report_v0 future_five_years remains a controlled reading without absolute event claims."
+    },
+    {
+      "name": "final_report_future_five_years_not_neutral_fallback",
+      "passed": true,
+      "message": "final_report_v0 future_five_years avoids vague neutral fallback wording."
+    },
+    {
+      "name": "shen_sha_not_fortune_verdict",
+      "passed": true,
+      "message": "Shen sha output remains a structured hit list without fortune verdict language."
+    },
+    {
+      "name": "final_report_shen_sha_not_fortune_verdict",
+      "passed": true,
+      "message": "final_report_v0 does not turn shen sha hits into fortune verdicts."
+    },
+    {
+      "name": "report_boundary_terms_absent",
+      "passed": true,
+      "message": "report.json does not contain obvious out-of-scope finalization terms."
+    },
+    {
+      "name": "luck_cycle_structure_complete",
+      "passed": true,
+      "message": "luck_cycle contains basis, direction, start_age, and complete cycles."
+    },
+    {
+      "name": "luck_cycle_consistent_with_basis",
+      "passed": true,
+      "message": "luck_cycle is consistent with the configured basis."
+    },
+    {
+      "name": "final_report_wealth_restates_rules_only",
+      "passed": true,
+      "message": "final_report_v0 wealth section is a controlled restatement of wealth_reading_v0."
+    },
+    {
+      "name": "report_within_chart_rules_scope",
+      "passed": true,
+      "message": "report.json stays within the scope defined by chart.json and rules.json."
+    },
+    {
+      "name": "rules_consistent_with_chart",
+      "passed": true,
+      "message": "rules.json is consistent with chart.json."
+    },
+    {
+      "name": "foreign_school_terms_absent",
+      "passed": true,
+      "message": "No foreign-school terms were found in report.json."
+    }
+  ]
+}

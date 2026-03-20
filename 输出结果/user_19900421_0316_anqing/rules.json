@@ -1,0 +1,1105 @@
+{
+  "rules_version": "bazi-rules-shen-sha-v5",
+  "engine_version": "bazi-engine-real-calc-py310-v2",
+  "based_on_chart_version": "bazi-engine-real-calc-py310-v2",
+  "status": "ok",
+  "day_master": "丙",
+  "summary": "日主丙；十神已完成明透与藏干映射；基础旺衰评分 v0 结果为 weak/偏弱；月令主气格识别 v1 状态为 candidate_only/月食神格；调候受控版 v0 状态为 candidate_only/春季；流年骨架 v0 状态为 determined/1995-2004；神煞受控版 v0 状态为 determined/0项命中；事业专项受控版 v0 状态为 determined/active/active_breakthrough；财运专项受控版 v0 状态为 determined/active/leverage_growth；婚恋专项受控版 v0 状态为 determined/active；候选用神方法为 candidate_only_v0；最终用神受控版 v0 状态为 determined。",
+  "ten_gods": {
+    "stems_visible": [
+      {
+        "pillar": "year",
+        "stem": "庚",
+        "god": "偏财",
+        "is_day_master": false,
+        "evidence_refs": [
+          "E106",
+          "E105"
+        ]
+      },
+      {
+        "pillar": "month",
+        "stem": "庚",
+        "god": "偏财",
+        "is_day_master": false,
+        "evidence_refs": [
+          "E106",
+          "E105"
+        ]
+      },
+      {
+        "pillar": "day",
+        "stem": "丙",
+        "god": "day_master",
+        "is_day_master": true,
+        "evidence_refs": [
+          "E106"
+        ]
+      },
+      {
+        "pillar": "hour",
+        "stem": "庚",
+        "god": "偏财",
+        "is_day_master": false,
+        "evidence_refs": [
+          "E106",
+          "E105"
+        ]
+      }
+    ],
+    "branches_hidden": [
+      {
+        "pillar": "year",
+        "branch": "午",
+        "hidden_stems": [
+          {
+            "stem": "丁",
+            "god": "劫财",
+            "evidence_refs": [
+              "E106",
+              "E104"
+            ]
+          },
+          {
+            "stem": "己",
+            "god": "伤官",
+            "evidence_refs": [
+              "E106",
+              "E104"
+            ]
+          }
+        ]
+      },
+      {
+        "pillar": "month",
+        "branch": "辰",
+        "hidden_stems": [
+          {
+            "stem": "戊",
+            "god": "食神",
+            "evidence_refs": [
+              "E106",
+              "E104"
+            ]
+          },
+          {
+            "stem": "乙",
+            "god": "正印",
+            "evidence_refs": [
+              "E106",
+              "E104"
+            ]
+          },
+          {
+            "stem": "癸",
+            "god": "正官",
+            "evidence_refs": [
+              "E106",
+              "E104"
+            ]
+          }
+        ]
+      },
+      {
+        "pillar": "day",
+        "branch": "辰",
+        "hidden_stems": [
+          {
+            "stem": "戊",
+            "god": "食神",
+            "evidence_refs": [
+              "E106",
+              "E104"
+            ]
+          },
+          {
+            "stem": "乙",
+            "god": "正印",
+            "evidence_refs": [
+              "E106",
+              "E104"
+            ]
+          },
+          {
+            "stem": "癸",
+            "god": "正官",
+            "evidence_refs": [
+              "E106",
+              "E104"
+            ]
+          }
+        ]
+      },
+      {
+        "pillar": "hour",
+        "branch": "寅",
+        "hidden_stems": [
+          {
+            "stem": "甲",
+            "god": "偏印",
+            "evidence_refs": [
+              "E106",
+              "E104"
+            ]
+          },
+          {
+            "stem": "丙",
+            "god": "比肩",
+            "evidence_refs": [
+              "E106",
+              "E104"
+            ]
+          },
+          {
+            "stem": "戊",
+            "god": "食神",
+            "evidence_refs": [
+              "E106",
+              "E104"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "strength": {
+    "score": -5,
+    "label": "weak",
+    "summary": "偏弱",
+    "factors": [
+      {
+        "name": "month_branch_produced_by_day_master",
+        "impact": -4,
+        "evidence_refs": [
+          "E101"
+        ]
+      },
+      {
+        "name": "visible_support_stems",
+        "impact": 0,
+        "evidence_refs": [
+          "E102",
+          "E105"
+        ]
+      },
+      {
+        "name": "hidden_root_support",
+        "impact": 5,
+        "evidence_refs": [
+          "E104"
+        ]
+      },
+      {
+        "name": "visible_drain_and_control",
+        "impact": -6,
+        "evidence_refs": [
+          "E103",
+          "E105"
+        ]
+      }
+    ],
+    "evidence_refs": [
+      "E101",
+      "E102",
+      "E105",
+      "E104",
+      "E103"
+    ]
+  },
+  "pattern_system_v1": {
+    "method": "month_main_qi_pattern_v1",
+    "status": "candidate_only",
+    "candidate_pattern": {
+      "pattern_key": "yueshishen",
+      "pattern_name": "月食神格",
+      "source": "month_branch_main_qi",
+      "source_name": "月令主气",
+      "source_stem": "戊",
+      "source_god": "食神",
+      "transparency": "hidden_only",
+      "evidence_refs": [
+        "E106",
+        "E104",
+        "E401",
+        "E402",
+        "E404"
+      ]
+    },
+    "final_pattern": null,
+    "notes": [
+      {
+        "text": "当前格局体系受控版 v1 仅识别月令主气格，不扩展到复杂格局、调候、神煞或流年流月。",
+        "evidence_refs": [
+          "E405"
+        ]
+      },
+      {
+        "text": "月令主气为食神，可列为月食神格候选，但当前未见同神透干，仅保留 candidate_pattern。",
+        "evidence_refs": [
+          "E404"
+        ]
+      }
+    ],
+    "evidence_refs": [
+      "E106",
+      "E104",
+      "E401",
+      "E402",
+      "E404",
+      "E405"
+    ]
+  },
+  "climate_balance_v0": {
+    "method": "climate_balance_v0",
+    "status": "candidate_only",
+    "season_context": {
+      "month_branch": "辰",
+      "season": "spring",
+      "season_name": "春",
+      "baseline_tendencies": [
+        "damp"
+      ],
+      "detected_tendencies": [
+        "cold",
+        "dry"
+      ],
+      "evidence_refs": [
+        "E501",
+        "E503"
+      ]
+    },
+    "candidate_adjustments": [
+      {
+        "element": "earth",
+        "direction": "drying",
+        "priority": 1,
+        "reason": "月支辰归于春季，当前季节背景偏湿，可先将土作为燥化方向的调候候选。",
+        "evidence_refs": [
+          "E501",
+          "E502"
+        ]
+      },
+      {
+        "element": "fire",
+        "direction": "warming",
+        "priority": 2,
+        "reason": "月支辰归于春季，当前季节背景偏湿，可先将火作为温暖方向的调候候选。 当前五行分布对温暖方向有额外支持。",
+        "evidence_refs": [
+          "E501",
+          "E502",
+          "E503"
+        ]
+      }
+    ],
+    "notes": [
+      {
+        "text": "调候受控版 v0 只输出季节寒暖燥湿候选建议，不等同最终用神，也不展开完整传统调候体系。",
+        "evidence_refs": [
+          "E507"
+        ]
+      },
+      {
+        "text": "调候候选只在当前独立层内成立，不能覆盖既有强弱、格局与用神结论。",
+        "evidence_refs": [
+          "E506"
+        ]
+      },
+      {
+        "text": "当前仅能依据月支季节背景给出调候候选，五行分布信号不足以提升确定性。",
+        "evidence_refs": [
+          "E505"
+        ]
+      }
+    ],
+    "evidence_refs": [
+      "E501",
+      "E503",
+      "E502",
+      "E507",
+      "E506",
+      "E505"
+    ]
+  },
+  "annual_flow_v0": {
+    "method": "annual_flow_v0",
+    "status": "determined",
+    "window": {
+      "start_year": 1995,
+      "end_year": 2004,
+      "preview_year_count": 10,
+      "start_year_source": "luck_cycle_first_entry_start_year",
+      "sequencing_basis": "birth_year_pillar_plus_solar_year_delta"
+    },
+    "entries": [
+      {
+        "year": 1995,
+        "ganzhi": "乙亥",
+        "relative_index": 0,
+        "evidence_refs": [
+          "E701",
+          "E702"
+        ]
+      },
+      {
+        "year": 1996,
+        "ganzhi": "丙子",
+        "relative_index": 1,
+        "evidence_refs": [
+          "E701",
+          "E702"
+        ]
+      },
+      {
+        "year": 1997,
+        "ganzhi": "丁丑",
+        "relative_index": 2,
+        "evidence_refs": [
+          "E701",
+          "E702"
+        ]
+      },
+      {
+        "year": 1998,
+        "ganzhi": "戊寅",
+        "relative_index": 3,
+        "evidence_refs": [
+          "E701",
+          "E702"
+        ]
+      },
+      {
+        "year": 1999,
+        "ganzhi": "己卯",
+        "relative_index": 4,
+        "evidence_refs": [
+          "E701",
+          "E702"
+        ]
+      },
+      {
+        "year": 2000,
+        "ganzhi": "庚辰",
+        "relative_index": 5,
+        "evidence_refs": [
+          "E701",
+          "E702"
+        ]
+      },
+      {
+        "year": 2001,
+        "ganzhi": "辛巳",
+        "relative_index": 6,
+        "evidence_refs": [
+          "E701",
+          "E702"
+        ]
+      },
+      {
+        "year": 2002,
+        "ganzhi": "壬午",
+        "relative_index": 7,
+        "evidence_refs": [
+          "E701",
+          "E702"
+        ]
+      },
+      {
+        "year": 2003,
+        "ganzhi": "癸未",
+        "relative_index": 8,
+        "evidence_refs": [
+          "E701",
+          "E702"
+        ]
+      },
+      {
+        "year": 2004,
+        "ganzhi": "甲申",
+        "relative_index": 9,
+        "evidence_refs": [
+          "E701",
+          "E702"
+        ]
+      }
+    ],
+    "notes": [
+      {
+        "text": "当前流年骨架 v0 仅输出固定窗口内的流年干支序列，不代表吉凶判断、事件预测或流月展开。",
+        "evidence_refs": [
+          "E704"
+        ]
+      },
+      {
+        "text": "已基于出生年柱与大运起运年份，输出固定十年窗口的流年干支骨架。",
+        "evidence_refs": [
+          "E703"
+        ]
+      }
+    ],
+    "evidence_refs": [
+      "E701",
+      "E702",
+      "E704",
+      "E703"
+    ]
+  },
+  "annual_reading_v0": {
+    "method": "annual_reading_v0",
+    "status": "determined",
+    "window": {
+      "start_year": 2026,
+      "end_year": 2030,
+      "preview_year_count": 5,
+      "reference_year": 2026,
+      "reference_year_source": "project_reference_year_v0",
+      "sequencing_basis": "birth_year_pillar_plus_solar_year_delta"
+    },
+    "entries": [
+      {
+        "year": 2026,
+        "ganzhi": "丙午",
+        "career_signal": "favorable",
+        "wealth_signal": "favorable",
+        "relationship_signal": "favorable",
+        "mentor_signal": "cautious",
+        "summary": "当前年度整体较有利，适合围绕重点议题主动推进，但仍不作事件性断语。事业推进机会较多，可主动发力。财务机会偏多，可主动整理资源与安排。婚恋推进信号较强，但仍不作具体事件断定。助力信号偏弱，不宜高估外部帮助。",
+        "evidence_refs": [
+          "E701",
+          "E702",
+          "E903",
+          "E905",
+          "E908",
+          "E201",
+          "E203",
+          "E205",
+          "E301",
+          "E305",
+          "E306",
+          "E308",
+          "E107",
+          "E501",
+          "E503",
+          "E502",
+          "E507",
+          "E506",
+          "E505",
+          "E207",
+          "E209",
+          "E208",
+          "E907"
+        ]
+      },
+      {
+        "year": 2027,
+        "ganzhi": "丁未",
+        "career_signal": "positive",
+        "wealth_signal": "positive",
+        "relationship_signal": "mixed",
+        "mentor_signal": "cautious",
+        "summary": "当前年度有推进空间，也有分化信号，宜边观察边推进。事业信号偏利，较适合主动推进。财运信号偏利，适合推进现有资源整合。婚恋以观察和磨合为主，不宜急于定性。助力信号偏弱，不宜高估外部帮助。",
+        "evidence_refs": [
+          "E701",
+          "E702",
+          "E903",
+          "E905",
+          "E908",
+          "E201",
+          "E203",
+          "E205",
+          "E301",
+          "E305",
+          "E306",
+          "E308",
+          "E107",
+          "E501",
+          "E503",
+          "E502",
+          "E507",
+          "E506",
+          "E505",
+          "E207",
+          "E209",
+          "E208",
+          "E907"
+        ]
+      },
+      {
+        "year": 2028,
+        "ganzhi": "戊申",
+        "career_signal": "mixed",
+        "wealth_signal": "mixed",
+        "relationship_signal": "cautious",
+        "mentor_signal": "cautious",
+        "summary": "当前年度整体需要谨慎，宜先稳住节奏再择机推进。事业可稳中求进，先看反馈再加速。财务议题宜稳中安排，边推进边观察。婚恋推进宜更谨慎，先看互动质量。助力信号偏弱，不宜高估外部帮助。",
+        "evidence_refs": [
+          "E701",
+          "E702",
+          "E903",
+          "E905",
+          "E908",
+          "E201",
+          "E203",
+          "E205",
+          "E301",
+          "E305",
+          "E306",
+          "E308",
+          "E107",
+          "E501",
+          "E503",
+          "E502",
+          "E507",
+          "E506",
+          "E505",
+          "E207",
+          "E209",
+          "E208",
+          "E907"
+        ]
+      },
+      {
+        "year": 2029,
+        "ganzhi": "己酉",
+        "career_signal": "mixed",
+        "wealth_signal": "mixed",
+        "relationship_signal": "cautious",
+        "mentor_signal": "favorable",
+        "summary": "当前年度有推进空间，也有分化信号，宜边观察边推进。事业可稳中求进，先看反馈再加速。财务议题宜稳中安排，边推进边观察。婚恋推进宜更谨慎，先看互动质量。贵人助力偏强，可主动争取资源与协助。",
+        "evidence_refs": [
+          "E701",
+          "E702",
+          "E903",
+          "E905",
+          "E908",
+          "E201",
+          "E203",
+          "E205",
+          "E301",
+          "E305",
+          "E306",
+          "E308",
+          "E107",
+          "E501",
+          "E503",
+          "E502",
+          "E507",
+          "E506",
+          "E505",
+          "E207",
+          "E209",
+          "E208",
+          "E601",
+          "E605",
+          "E604",
+          "E904",
+          "E907"
+        ]
+      },
+      {
+        "year": 2030,
+        "ganzhi": "庚戌",
+        "career_signal": "mixed",
+        "wealth_signal": "mixed",
+        "relationship_signal": "cautious",
+        "mentor_signal": "cautious",
+        "summary": "当前年度整体需要谨慎，宜先稳住节奏再择机推进。事业可稳中求进，先看反馈再加速。财务议题宜稳中安排，边推进边观察。婚恋推进宜更谨慎，先看互动质量。助力信号偏弱，不宜高估外部帮助。",
+        "evidence_refs": [
+          "E701",
+          "E702",
+          "E903",
+          "E905",
+          "E908",
+          "E201",
+          "E203",
+          "E205",
+          "E301",
+          "E305",
+          "E306",
+          "E308",
+          "E107",
+          "E501",
+          "E503",
+          "E502",
+          "E507",
+          "E506",
+          "E505",
+          "E207",
+          "E209",
+          "E208",
+          "E907"
+        ]
+      }
+    ],
+    "notes": [
+      {
+        "text": "为保证审计与 golden 稳定，未来五年年度阅读当前固定以参考年份 2026 启动窗口。",
+        "evidence_refs": [
+          "E901"
+        ]
+      },
+      {
+        "text": "未来五年年度阅读当前只输出受控的年度倾向判断，不展开具体事件预测、流月或绝对断语。",
+        "evidence_refs": [
+          "E906"
+        ]
+      },
+      {
+        "text": "mentor_signal 只表示结构化助力信号，不保证贵人事件或提携事件发生。",
+        "evidence_refs": [
+          "E904"
+        ]
+      },
+      {
+        "text": "已基于固定参考年份、当前大运位置与既有规则层，输出未来五年的受控定性阅读。",
+        "evidence_refs": [
+          "E902",
+          "E903",
+          "E907",
+          "E908"
+        ]
+      }
+    ],
+    "evidence_refs": [
+      "E701",
+      "E702",
+      "E903",
+      "E905",
+      "E908",
+      "E201",
+      "E203",
+      "E205",
+      "E301",
+      "E305",
+      "E306",
+      "E308",
+      "E107",
+      "E501",
+      "E503",
+      "E502",
+      "E507",
+      "E506",
+      "E505",
+      "E207",
+      "E209",
+      "E208",
+      "E907",
+      "E601",
+      "E605",
+      "E604",
+      "E904",
+      "E901",
+      "E906",
+      "E902"
+    ]
+  },
+  "career_reading_v0": {
+    "method": "career_reading_v0",
+    "status": "determined",
+    "base_support": "favorable",
+    "current_phase": "active",
+    "growth_mode": "active_breakthrough",
+    "future_tendency": "positive",
+    "resource_support": "mixed",
+    "conclusion": "命局层面的事业基础支撑较强。当前阶段更适合主动争取机会。更适合主动突破，但仍不展开具体事件预测。未来几年事业推进空间有所增加。外部资源与助力存在，但仍需主动经营。",
+    "notes": [
+      {
+        "text": "事业专项受控版 v0 只使用既有十神结构、扶抑层与未来五年事业信号做整合判断，不展开完整传统事业体系。",
+        "evidence_refs": [
+          "E1101",
+          "E1102"
+        ]
+      },
+      {
+        "text": "事业相关神煞命中只作辅助提示，不能单独推出事业结论。",
+        "evidence_refs": [
+          "E1105"
+        ]
+      },
+      {
+        "text": "未来倾向只汇总 annual_reading_v0 的既有事业与助力信号，不新增流月、流日或事件预测。",
+        "evidence_refs": [
+          "E1104",
+          "E1106"
+        ]
+      },
+      {
+        "text": "已基于事业相关十神结构、既有扶抑层、当前阶段与未来五年事业信号，输出事业专项受控结论。",
+        "evidence_refs": [
+          "E1103",
+          "E1104",
+          "E1106",
+          "E1107"
+        ]
+      }
+    ],
+    "evidence_refs": [
+      "E1101",
+      "E1102",
+      "E1103",
+      "E1104",
+      "E1105",
+      "E1106",
+      "E1107",
+      "E106",
+      "E105",
+      "E104",
+      "E201",
+      "E203",
+      "E205",
+      "E107",
+      "E301",
+      "E305",
+      "E306",
+      "E308",
+      "E401",
+      "E402",
+      "E404",
+      "E405",
+      "E501",
+      "E503",
+      "E502",
+      "E507",
+      "E506",
+      "E505",
+      "E601",
+      "E605",
+      "E604",
+      "E701",
+      "E702",
+      "E903",
+      "E905",
+      "E908",
+      "E207",
+      "E209",
+      "E208",
+      "E907",
+      "E904",
+      "E901",
+      "E906",
+      "E902"
+    ]
+  },
+  "wealth_reading_v0": {
+    "method": "wealth_reading_v0",
+    "status": "determined",
+    "base_support": "favorable",
+    "current_phase": "active",
+    "wealth_mode": "leverage_growth",
+    "future_tendency": "positive",
+    "resource_support": "positive",
+    "risk_control": "balanced_control",
+    "conclusion": "命局层面对财务承载与财运推进的基础支撑较强。当前阶段财务推进偏有利，可在控制边界内主动整理机会。财务模式更适合借助资源放大，可在受控前提下逐步放大。未来几年财运有改善空间，可逐步提高配置效率。外部资源与助力对财务增长有一定支持。当前宜边控风险边推进，不宜走向激进。",
+    "notes": [
+      {
+        "text": "财运专项受控版 v0 只整合既有十神结构、扶抑层、未来五年财运信号与当前资源支持，不展开完整传统财运体系。",
+        "evidence_refs": [
+          "E1201",
+          "E1202"
+        ]
+      },
+      {
+        "text": "财运相关神煞命中只作辅助提示，不能单独推出财运结论。",
+        "evidence_refs": [
+          "E1205"
+        ]
+      },
+      {
+        "text": "财运未来倾向只汇总 annual_reading_v0 的既有财运与助力信号，不新增流月、流日或事件预测。",
+        "evidence_refs": [
+          "E1204",
+          "E1206"
+        ]
+      },
+      {
+        "text": "已基于财星/食伤/印比等既有结构、现有扶抑层、当前阶段、未来五年财运信号与受控辅助信息，输出财运专项结论。",
+        "evidence_refs": [
+          "E1203",
+          "E1204",
+          "E1206",
+          "E1207",
+          "E1208"
+        ]
+      }
+    ],
+    "evidence_refs": [
+      "E1201",
+      "E1202",
+      "E1203",
+      "E1204",
+      "E1205",
+      "E1206",
+      "E1207",
+      "E1208",
+      "E106",
+      "E105",
+      "E104",
+      "E201",
+      "E203",
+      "E205",
+      "E107",
+      "E301",
+      "E305",
+      "E306",
+      "E308",
+      "E501",
+      "E503",
+      "E502",
+      "E507",
+      "E506",
+      "E505",
+      "E601",
+      "E605",
+      "E604",
+      "E701",
+      "E702",
+      "E903",
+      "E905",
+      "E908",
+      "E207",
+      "E209",
+      "E208",
+      "E907",
+      "E904",
+      "E901",
+      "E906",
+      "E902",
+      "E401",
+      "E402",
+      "E404",
+      "E405"
+    ]
+  },
+  "relationship_reading_v0": {
+    "method": "relationship_reading_v0",
+    "status": "determined",
+    "base_support": "mixed",
+    "partner_support": "mixed",
+    "stability_tendency": "challenging",
+    "current_phase": "active",
+    "future_tendency": "challenging",
+    "conclusion": "命局层面的关系基础支撑有一定依据，但分化仍在。伴侣/关系助力一般，仍需观察。婚恋稳定性波动信号偏多。当前阶段更适合主动推进，但仍不作事件断定。未来几年婚恋阻力仍偏大。",
+    "notes": [
+      {
+        "text": "婚恋专项受控版 v0 仅使用固定的性别-十神映射读取关系星结构，不展开完整传统婚恋体系。",
+        "evidence_refs": [
+          "E1001",
+          "E1002"
+        ]
+      },
+      {
+        "text": "关系相关神煞命中只作辅助提示，不能单独推出婚恋结论。",
+        "evidence_refs": [
+          "E1005"
+        ]
+      },
+      {
+        "text": "未来倾向只汇总 annual_reading_v0 的既有婚恋信号，不新增流月、流日或事件预测。",
+        "evidence_refs": [
+          "E1004",
+          "E1006"
+        ]
+      },
+      {
+        "text": "已基于关系星结构、既有扶抑层、当前阶段与未来五年婚恋信号，输出婚恋专项受控结论。",
+        "evidence_refs": [
+          "E1003",
+          "E1004",
+          "E1006",
+          "E1007"
+        ]
+      }
+    ],
+    "evidence_refs": [
+      "E1002",
+      "E1003",
+      "E1004",
+      "E1005",
+      "E1006",
+      "E1007",
+      "E106",
+      "E105",
+      "E201",
+      "E203",
+      "E205",
+      "E107",
+      "E301",
+      "E305",
+      "E306",
+      "E308",
+      "E601",
+      "E605",
+      "E604",
+      "E701",
+      "E702",
+      "E903",
+      "E905",
+      "E908",
+      "E501",
+      "E503",
+      "E502",
+      "E507",
+      "E506",
+      "E505",
+      "E207",
+      "E209",
+      "E208",
+      "E907",
+      "E904",
+      "E901",
+      "E906",
+      "E902",
+      "E1001"
+    ]
+  },
+  "shen_sha_v0": {
+    "method": "shen_sha_v0",
+    "status": "determined",
+    "hits": [],
+    "notes": [
+      {
+        "text": "神煞受控版 v0 仅列示少量基础神煞命中，不代表综合吉凶定论。",
+        "evidence_refs": [
+          "E601"
+        ]
+      },
+      {
+        "text": "当前神煞命中结果只表示规则映射成立，不与格局、调候、旺衰或用神结论联动。",
+        "evidence_refs": [
+          "E605"
+        ]
+      },
+      {
+        "text": "已按受控规则检查所选基础神煞，当前未命中所选项目。",
+        "evidence_refs": [
+          "E604"
+        ]
+      }
+    ],
+    "evidence_refs": [
+      "E601",
+      "E605",
+      "E604"
+    ]
+  },
+  "provisional_conclusions": {
+    "favorable_elements_candidates": [
+      {
+        "element": "fire",
+        "reason": "当前日主偏弱，同类火可直接扶助日主，作为候选观察。 月令主气对日主有制泄作用，相关扶助方向优先级提高。",
+        "evidence_refs": [
+          "E201",
+          "E203",
+          "E205"
+        ]
+      },
+      {
+        "element": "wood",
+        "reason": "当前日主偏弱，生扶类木可补助日主，作为候选观察。 月令主气对日主有制泄作用，相关扶助方向优先级提高。",
+        "evidence_refs": [
+          "E201",
+          "E203",
+          "E205"
+        ]
+      }
+    ],
+    "unfavorable_elements_candidates": [
+      {
+        "element": "water",
+        "reason": "当前日主偏弱，水继续制日主，暂不宜优先考虑。",
+        "evidence_refs": [
+          "E201",
+          "E203"
+        ]
+      },
+      {
+        "element": "earth",
+        "reason": "当前日主偏弱，土会继续泄日主之气，暂不宜优先考虑。",
+        "evidence_refs": [
+          "E201",
+          "E203"
+        ]
+      }
+    ],
+    "method": "candidate_only_v0",
+    "notes": [
+      {
+        "text": "当前仅输出候选级别，不等同最终用神判定，未展开格局与调候。",
+        "evidence_refs": [
+          "E201",
+          "E107"
+        ]
+      }
+    ]
+  },
+  "final_useful_god_v0": {
+    "status": "determined",
+    "confidence": "medium",
+    "primary_element": "fire",
+    "secondary_elements": [
+      "wood"
+    ],
+    "reason_chain": [
+      {
+        "text": "当前日主偏弱，最终用神仅考虑扶、生日主方向的受限判定。",
+        "evidence_refs": [
+          "E301"
+        ]
+      },
+      {
+        "text": "月令偏置与当前主候选未冲突，可继续进入最终判定。",
+        "evidence_refs": [
+          "E305"
+        ]
+      },
+      {
+        "text": "候选火在当前盘面仍有足够支持分值，可进入最终判定。",
+        "evidence_refs": [
+          "E201",
+          "E203",
+          "E205",
+          "E301"
+        ]
+      },
+      {
+        "text": "候选火在优先级与支持度上具备明确主位。",
+        "evidence_refs": [
+          "E308"
+        ]
+      },
+      {
+        "text": "当前为最终用神受控版 v0，仅在证据一致时给出结论。",
+        "evidence_refs": [
+          "E306"
+        ]
+      },
+      {
+        "text": "木保留为次级辅助元素，不作为主用神。",
+        "evidence_refs": [
+          "E201",
+          "E203",
+          "E205",
+          "E308"
+        ]
+      }
+    ],
+    "blockers": [],
+    "decision_basis": {
+      "method": "controlled_useful_god_v0",
+      "strength_label": "weak",
+      "candidate_alignment": true,
+      "month_bias_alignment": true,
+      "distribution_alignment": true,
+      "conflict_detected": false,
+      "allowed_to_finalize": true
+    },
+    "evidence_refs": [
+      "E201",
+      "E203",
+      "E205",
+      "E301",
+      "E305",
+      "E306",
+      "E308"
+    ]
+  }
+}
